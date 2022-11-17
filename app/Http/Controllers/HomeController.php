@@ -22,6 +22,18 @@ class HomeController extends Controller
         return view('index', $data);
     }
 
+    public function login($user_type)
+    {
+        $data['user_type'] = $user_type;
+        return view('e-scape.login', $data);
+    }
+
+    public function register($user_type)
+    {
+        $data['user_type'] = $user_type;
+        return view('e-scape.e-register', $data);
+    }
+
     // public function login()
     // {
     //     $data['css'] = ['login'];

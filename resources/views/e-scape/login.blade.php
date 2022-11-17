@@ -9,5 +9,5 @@
 @endsection
 
 @section('content')
-<home></home>
+<login :user-type="{{ json_encode($user_type) }}"></login>
 @endsection

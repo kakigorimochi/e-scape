@@ -1,9 +1,8 @@
 <template>
     <div class="container">
-        <h1>Hello {{ userType }}!</h1>
+        <h1>Login {{ userType }}!</h1>
         <div class="container">
             <b-button @click="login" type="is-info">Login</b-button>
-            <b-button @click="register" type="is-info is-light">Register</b-button>
         </div>
     </div>
 </template>
@@ -19,9 +18,6 @@ export default {
     methods: {
         login() {
             window.location = '/' + this.userType + '/login';
-        },
-        register() {
-            window.location = '/' + this.userType + '/register';
         }
     }
 }

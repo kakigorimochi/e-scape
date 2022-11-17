@@ -4,14 +4,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+import Buefy from 'buefy';
+import 'buefy/dist/buefy.css';
+import { Datetime } from 'vue-datetime';
+import 'vue-datetime/dist/vue-datetime.css';
 
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-Vue.use(Buefy)
+Vue.use(Buefy);
+Vue.use(Datetime);
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,14 +26,12 @@ Vue.use(Buefy)
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.component('datetime', Datetime);
 Vue.component('home', require('@/pages/home').default);
 Vue.component('index', require('@/pages/index').default);
+Vue.component('login', require('@/pages/login').default);
+Vue.component('register', require('@/pages/register').default);
 
-Vue.component('commuter-login', require('@/pages/commuter/login').default);
-Vue.component('commuter-register', require('@/pages/commuter/register').default);
-
-Vue.component('operator-login', require('@/pages/operator/login').default);
-Vue.component('operator-register', require('@/pages/operator/register').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -40,6 +41,16 @@ Vue.component('operator-register', require('@/pages/operator/register').default)
 
 const app = new Vue({
     el: '#app',
+    methods: {
+        defaultError(msg = 'Oops! Something went wrong.') {
+            this.$buefy.toast.open({
+                duration: 5000,
+                message: msg,
+                position: 'is-bottom',
+                type: 'is-danger'
+            })
+        },
+    }
 });
 
 export default app;
