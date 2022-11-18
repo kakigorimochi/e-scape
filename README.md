@@ -11,7 +11,11 @@
 
 Copy the .env file in the root folder.
 
-Run `composer install` and `npm install` in the terminal.
+Run `composer install`, `npm install` `php artisan migrate --seed` and in the terminal.
+
+## Datetime vue component
+
+Please refer to https://mariomka.github.io/vue-datetime/ for documentations.
 
 ## About Laravel
 

@@ -23,6 +23,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "buefy": "^0.9.22"
+        "buefy": "^0.9.22",
+        "moment": "^2.29.4",
+        "vue-datetime": "^1.0.0-beta.14"
     }
 }
