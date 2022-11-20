@@ -9,9 +9,11 @@
 
 ## Installation (to-be-updated)
 
-Copy the .env file in the root folder.
-
 Run `composer install`, `npm install` `php artisan migrate --seed` and in the terminal.
+
+Run `npm run dev` and `php artisan serve` in terminal.
+
+Note: Run `npm run watch` instead of `npm run dev` for development.
 
 ## Datetime vue component
 
