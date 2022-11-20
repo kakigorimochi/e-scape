@@ -8,6 +8,19 @@ use Illuminate\Http\Request;
 
 class OperatorController extends Controller
 {
+    public function index()
+    {
+        $data['css']       = ['index'];
+        $data['user_type'] = 'operator';
+        return view('index', $data);
+    }
+
+    public function home()
+    {
+        $data['css'] = [];
+        return view('e-scape.operator.menu', $data);
+    }
+
     public function register(Request $request)
     {
         $rs = SharedFunctions::default_msg();

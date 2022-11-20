@@ -32,6 +32,9 @@ Vue.component('index', require('@/pages/index').default);
 Vue.component('login', require('@/pages/login').default);
 Vue.component('register', require('@/pages/register').default);
 
+Vue.component('commuter-index', require('@/pages/commuter/index').default);
+
+Vue.component('operator-index', require('@/pages/operator/index').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
