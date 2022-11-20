@@ -9,5 +9,5 @@
 @endsection
 
 @section('content')
-<home></home>
+<commuter-index></commuter-index>
 @endsection

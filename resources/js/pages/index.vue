@@ -1,9 +1,13 @@
 <template>
-    <div class="container">
-        <h1>Hello {{ userType }}!</h1>
-        <div class="container">
-            <b-button @click="login" type="is-info">Login</b-button>
-            <b-button @click="register" type="is-info is-light">Register</b-button>
+    <div class="container pt-6 px-6">
+        <span class="is-size-1">Hello {{ userType }}!</span>
+        <div class="container is-flex is-flex-direction-column mt-6 pb-6">
+            <div class="mb-3">
+                <b-button @click="login" type="is-info">Login</b-button>
+            </div>
+            <div>
+                <b-button @click="register" type="is-info is-light">Register</b-button>
+            </div>
         </div>
     </div>
 </template>

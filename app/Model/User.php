@@ -27,7 +27,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'id' => 'char'
+        'uuid' => 'char'
     ];
 
     protected static function boot()
@@ -35,7 +35,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function (self $model) {
-            $model->{$model->getKeyName()} = Uuid::uuid1()->toString();
+            $model->uuid = Uuid::uuid1()->toString();
         });
     }
 

@@ -16,14 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@home');
+Route::get('/commuter', 'CommuterController@index');
 Route::get('/index', 'HomeController@home');
-Route::get('/{user_type}', 'HomeController@index');
 Route::get('/{user_type}/login', 'HomeController@login');
 Route::get('/{user_type}/register', 'HomeController@register');
+Route::get('/operator', 'OperatorController@index');
+Route::get('/logout', 'Auth\LoginController@logout');
 Route::prefix('commuter')->group(function () {
+    Route::get('index', 'CommuterController@home');
     Route::post('register_user', 'CommuterController@register');
 });
 Route::prefix('operator')->group(function () {
+    Route::get('index', 'OperatorController@home');
     Route::post('register_user', 'OperatorController@register');
 });
-// Route::post('/login', 'Auth\LoginController@login');
+Route::post('/login', 'Auth\LoginController@custom_login');
