@@ -1,8 +1,4 @@
 body {
-    font-family: 'Red Hat Text', sans-serif!important;
-    height: 100vh;
-    background: linear-gradient(to bottom, #ffffff 0%, #bbbbbb 100%);
-    /* Global yung top 4 DELETE.ME */
     background-image: url(../img/commuter.png), url(../img/bus.png);
     background-position: -500% 100%, -60% 120%;
     background-repeat: no-repeat, no-repeat;

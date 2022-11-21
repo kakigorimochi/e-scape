@@ -10,14 +10,14 @@ class CommuterController extends Controller
 {
     public function index()
     {
-        $data['css']       = ['index'];
+        $data['css']       = ['global', 'index'];
         $data['user_type'] = 'commuter';
         return view('index', $data);
     }
 
     public function home()
     {
-        $data['css'] = [];
+        $data['css'] = ['global'];
         return view('e-scape.commuter.menu', $data);
     }
 
