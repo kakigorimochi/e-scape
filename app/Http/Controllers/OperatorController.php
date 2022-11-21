@@ -10,14 +10,14 @@ class OperatorController extends Controller
 {
     public function index()
     {
-        $data['css']       = ['index'];
+        $data['css']       = ['global', 'index'];
         $data['user_type'] = 'operator';
         return view('index', $data);
     }
 
     public function home()
     {
-        $data['css'] = [];
+        $data['css'] = ['global'];
         return view('e-scape.operator.menu', $data);
     }
 

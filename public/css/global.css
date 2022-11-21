@@ -1,0 +1,5 @@
+body {
+    font-family: 'Red Hat Text', sans-serif!important;
+    height: 100vh;
+    background: linear-gradient(to bottom, #ffffff 0%, #bbbbbb 100%);
+}
