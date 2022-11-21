@@ -1,9 +1,17 @@
 <template>
     <div class="container pt-6 px-6">
-        <span class="is-size-1">Login {{ userType }}!</span>
+        <div class="is-flex is-justify-content-center">
+            <div class="is-flex is-flex-direction-column">
+                <figure class="image mt-3 mx-auto is-96x96">
+                    <img src="/img/e-logo.png">
+                </figure>
+                <span id="title" class="is-size-2">E-scape</span>
+                <span id="usertype" class="has-text-centered is-size-5">{{ userType }}</span>
+            </div>
+        </div>
         <div class="container is-flex is-flex-direction-column mt-6 pb-6">
             <div class="mb-3">
-                <b-field label="Email / Phone number / Username">
+                <b-field label="E-mail">
                     <b-input v-model="email"></b-input>
                 </b-field>
             </div>
@@ -12,8 +20,8 @@
                     <b-input v-model="password" type="password"></b-input>
                 </b-field>
             </div>
-            <div class="mb-3">
-                <b-button @click="login" type="is-info">Login</b-button>
+            <div class=" mb-3">
+                <b-button id="login" @click="login" type="is-success" class="is-pulled-right">Login</b-button>
             </div>
         </div>
     </div>

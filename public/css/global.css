@@ -1,5 +1,14 @@
-body {
-    font-family: 'Red Hat Text', sans-serif!important;
-    height: 100vh;
-    background: linear-gradient(to bottom, #ffffff 0%, #bbbbbb 100%);
+html {
+    background-image: linear-gradient(to bottom, #ffffff 90%, #e1e1e1 100%);
 }
+html, body {
+    font-family: 'Red Hat Text', sans-serif!important;
+}
+body {
+    width: 100vw;
+    height: 100vh;
+}
+#usertype {
+    text-transform: capitalize;
+}
+

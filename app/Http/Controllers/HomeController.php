@@ -17,7 +17,7 @@ class HomeController extends Controller
 
     public function login($user_type)
     {
-        $data['css'] = ['global'];
+        $data['css'] = ['global', 'login'];
         $data['user_type'] = $user_type;
         return view('e-scape.login', $data);
     }

@@ -1,0 +1,26 @@
+body {
+    background-image: url(../img/commuter.png), url(../img/bus.png);
+    background-repeat: no-repeat;
+    background-position: -6em 35em, 8em 25em;
+    background-size: 25em, 45em;
+}
+#title, button span {
+    font-weight: 600;
+}
+input.input{
+    border-color: white white #555;
+    background-color: #fff!important;
+    border-radius: 0;
+    border-bottom-width: 3px;
+    box-shadow: none;
+}
+input.input:focus,
+input.input:active {
+    border-color: white white #555;
+    background-color: rgb(250, 250, 250)!important;
+    box-shadow: inset 0 0.0625em 0.125em rgb(10 10 10 / 5%);
+}
+button#login {
+    width: 7.5em;
+    height: 2.3em;
+}
