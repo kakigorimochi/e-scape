@@ -7,15 +7,9 @@ body {
 #title, button span {
     font-weight: 600;
 }
-button#comm, button#optr {
+button#login, button#register {
     height: 72px;
     border-radius: 20px;
     font-size: 22px;
-}
-button#comm {
     background-image: linear-gradient(to bottom, #4ab484 0%, #48c78e 51%, #4ab484 100%) ;
-}
-button#optr {
-    color: #333;
-    border: 5px solid #48c78e;
 }
