@@ -23,7 +23,9 @@ Route::get('/{user_type}/register', 'HomeController@register');
 Route::get('/operator', 'OperatorController@index');
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::prefix('commuter')->group(function () {
+    Route::get('e-wallet', 'CommuterController@e_wallet');
     Route::get('index', 'CommuterController@home');
+    Route::post('add_wallet_balance', 'CommuterController@add_wallet_balance');
     Route::post('register_user', 'CommuterController@register');
 });
 Route::prefix('operator')->group(function () {

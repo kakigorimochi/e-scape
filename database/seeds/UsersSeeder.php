@@ -1,6 +1,7 @@
 <?php
 
 use App\Model\User;
+use App\Model\Wallet;
 use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
@@ -12,7 +13,7 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $commuter = User::create([
             'user_type' => 0,
             'fname'     => 'John',
             'lname'     => 'Smith',
@@ -32,5 +33,6 @@ class UsersSeeder extends Seeder
             'username'  => 'janesmith',
             'password'  => bcrypt('password')
         ]);
+        Wallet::create(['user_id' => $commuter->id]);
     }
 }

@@ -2,8 +2,8 @@
     <div class="container pt-6 px-6">
         <div class="is-flex is-justify-content-center">
             <div class="is-flex is-flex-direction-column">
-                <figure class="image mt-3 mx-auto is-96x96">
-                    <img src="img/e-logo.png">
+                <figure class="image mt-6 mx-auto is-96x96">
+                    <img src="/img/e-logo.png">
                 </figure>
                 <span id="title" class="is-size-2">E-scape</span>
             </div>

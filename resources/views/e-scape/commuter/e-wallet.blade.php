@@ -9,5 +9,5 @@
 @endsection
 
 @section('content')
-<home></home>
+<commuter-e-wallet :current-balance="{{ json_encode($balance) }}"></commuter-e-wallet>
 @endsection
