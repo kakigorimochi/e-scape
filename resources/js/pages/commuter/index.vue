@@ -1,9 +1,30 @@
 <template>
     <div class="container pt-6 px-6">
-        <span class="is-size-1">Welcome commuter!</span>
+        <div class="is-flex is-justify-content-center">
+            <div class="is-flex is-flex-direction-column">
+                <figure class="image mt-6 mx-auto is-96x96">
+                    <img src="/img/e-logo.png">
+                </figure>
+                <span class="is-size-2">E-scape</span>
+            </div>
+        </div>
         <div class="container is-flex is-flex-direction-column mt-6 pb-6">
-            <div>
-                <b-button @click="logout" type="is-info is-light">Logout</b-button>
+            <span class="is-size-3 mb-6">Hello {{ info.fname }}!</span>
+            <div class="mb-5">
+                <b-button class="is-medium is-fullwidth"
+                    type="is-success">Single Journey Ticket</b-button>
+            </div>
+            <div class="mb-5">
+                <b-button class="is-medium is-fullwidth"
+                    @click="eWallet" type="is-success">E-wallet</b-button>
+            </div>
+            <div class="mb-5">
+                <b-button class="is-medium is-fullwidth"
+                    type="is-success">Rewards</b-button>
+            </div>
+            <div class="mb-5">
+                <b-button class="is-medium is-fullwidth"
+                    @click="logout" type="is-info is-light">Logout</b-button>
             </div>
         </div>
     </div>
@@ -14,7 +35,13 @@ export default {
     data () {
         return {};
     },
+    props: {
+        info: Object
+    },
     methods: {
+        eWallet() {
+            window.location = '/commuter/e-wallet'
+        },
         logout() {
             axios.get('/logout').then(() => {
                 window.location = '/';
