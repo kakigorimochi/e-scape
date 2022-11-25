@@ -12,7 +12,7 @@
             <span class="is-size-3 mb-6">Hello {{ info.fname }}!</span>
             <div class="mb-5">
                 <b-button class="is-medium is-fullwidth"
-                    type="is-success">Single Journey Ticket</b-button>
+                    @click="sjt" type="is-success">Single Journey Ticket</b-button>
             </div>
             <div class="mb-5">
                 <b-button class="is-medium is-fullwidth"
@@ -24,7 +24,7 @@
             </div>
             <div class="mb-5">
                 <b-button class="is-medium is-fullwidth"
-                    @click="logout" type="is-info is-light">Logout</b-button>
+                    @click="logout" type="is-success is-light">Logout</b-button>
             </div>
         </div>
     </div>
@@ -36,11 +36,16 @@ export default {
         return {};
     },
     props: {
-        info: Object
+        info: Object,
+        journey: Boolean
     },
     methods: {
         eWallet() {
-            window.location = '/commuter/e-wallet'
+            window.location = '/commuter/e-wallet';
+        },
+        sjt() {
+            if (this.journey) window.location = '/commuter/journey_qr';
+            else window.location = '/commuter/single-journey-ticket';
         },
         logout() {
             axios.get('/logout').then(() => {

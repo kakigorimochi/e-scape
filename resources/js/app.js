@@ -32,6 +32,9 @@ Vue.component('index', require('@/pages/index').default);
 Vue.component('login', require('@/pages/login').default);
 Vue.component('register', require('@/pages/register').default);
 
+Vue.component('commuter-e-journey', require('@/pages/commuter/journey').default);
+Vue.component('commuter-e-journey-qr', require('@/pages/commuter/journey-qr').default);
+Vue.component('commuter-e-payment', require('@/pages/commuter/payment').default);
 Vue.component('commuter-e-wallet', require('@/pages/commuter/ewallet').default);
 Vue.component('commuter-index', require('@/pages/commuter/index').default);
 

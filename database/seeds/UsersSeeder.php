@@ -23,7 +23,7 @@ class UsersSeeder extends Seeder
             'username'  => 'johnsmith',
             'password'  => bcrypt('password')
         ]);
-        User::create([
+        $operator = User::create([
             'user_type' => 1,
             'fname'     => 'Jane',
             'lname'     => 'Smith',
@@ -34,5 +34,6 @@ class UsersSeeder extends Seeder
             'password'  => bcrypt('password')
         ]);
         Wallet::create(['user_id' => $commuter->id]);
+        Wallet::create(['user_id' => $operator->id]);
     }
 }

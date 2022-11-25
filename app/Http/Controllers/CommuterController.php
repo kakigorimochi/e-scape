@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Libraries\SharedFunctions;
+use App\Model\Journey;
+use App\Model\Location;
 use App\Model\Transaction;
 use App\Model\User;
 use App\Model\Wallet;
@@ -21,16 +23,44 @@ class CommuterController extends Controller
     public function e_wallet()
     {
         $data['css']     = ['global'];
-        $data['balance'] = Wallet::where('user_id', Auth::user()->id)
-            ->pluck('balance')->first();
+        $data['balance'] = floatval(Wallet::where('user_id', Auth::user()->id)
+            ->pluck('balance')->first());
         return view('e-scape.commuter.e-wallet', $data);
     }
 
     public function home()
     {
-        $data['css']  = ['global'];
-        $data['info'] = Auth::user();
+        $data['css']     = ['global'];
+        $data['info']    = Auth::user();
+        $data['journey'] = false;
+        if (Journey::where('user_id', Auth::user()->id)->where('status', 2)->first())
+            $data['journey'] = true;
         return view('e-scape.commuter.menu', $data);
+    }
+
+    public function journey_qr()
+    {
+        $data['css']     = ['global'];
+        $data['journey'] = Journey::where('user_id', Auth::user()->id)
+            ->where('status', 2)->first();
+        $data['uuid']    = Auth::user()->uuid;
+        $data['wallet']  = Wallet::where('user_id', Auth::user()->id)->first();
+        return view('e-scape.commuter.e-journey-qr', $data);
+    }
+    
+    public function pay_journey()
+    {
+        $data['css']     = ['global'];
+        $data['journey'] = Journey::where('user_id', Auth::user()->id)
+            ->where('status', 2)->first();
+        return view('e-scape.commuter.e-payment', $data);
+    }
+
+    public function single_journey_ticket()
+    {
+        $data['css']       = ['global'];
+        $data['locations'] = Location::all();
+        return view('e-scape.commuter.e-journey', $data);
     }
 
     public function add_wallet_balance(Request $request)
@@ -51,6 +81,18 @@ class CommuterController extends Controller
         return response()->json($rs);
     }
 
+    public function cancel_journey(Request $request)
+    {
+        $rs = SharedFunctions::default_msg();
+        $query = Journey::where('id', $request->id)->delete();
+        if ($query) $rs = SharedFunctions::success_msg('Cancelled journey successfully!');
+        return response()->json($rs);
+    }
+
+    public function journey_payment()
+    {
+    }
+
     public function register(Request $request)
     {
         $rs = SharedFunctions::default_msg();
@@ -66,6 +108,20 @@ class CommuterController extends Controller
         ]);
         $wallet = Wallet::create(['user_id' => $query->id]);
         if ($query && $wallet) $rs = SharedFunctions::success_msg('Registered successfully!');
+        return response()->json($rs);
+    }
+
+    public function submit_journey(Request $request)
+    {
+        $rs = SharedFunctions::default_msg();
+        $query = Journey::create([
+            'user_id' => Auth::user()->id,
+            'origin_id' => $request->origin_id,
+            'destination_id' => $request->destination_id,
+            'amount' => rand(10, 70),
+            'status' => Journey::STATUS_PENDING
+        ]);
+        if ($query) $rs = SharedFunctions::success_msg('Journey created successfully!');
         return response()->json($rs);
     }
 }
