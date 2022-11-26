@@ -9,6 +9,5 @@
 @endsection
 
 @section('content')
-<commuter-index :info="{{ json_encode($info) }}"
-	:journey="{{ json_encode($journey) }}"></commuter-index>
+<commuter-e-payment :journey="{{ json_encode($journey) }}"></commuter-e-payment>
 @endsection

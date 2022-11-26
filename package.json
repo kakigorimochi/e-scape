@@ -25,6 +25,7 @@
     "dependencies": {
         "buefy": "^0.9.22",
         "moment": "^2.29.4",
-        "vue-datetime": "^1.0.0-beta.14"
+        "vue-datetime": "^1.0.0-beta.14",
+        "vue-qr": "^4.0.9"
     }
 }
