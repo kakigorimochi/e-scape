@@ -10,20 +10,22 @@
             </div>
         </div>
         <div class="container is-flex is-flex-direction-column mt-6 pb-6">
-            <div class="mb-3">
-                <b-field label="E-mail">
-                    <b-input v-model="email"></b-input>
-                </b-field>
-            </div>
-            <div class="mb-3">
-                <b-field label="Password">
-                    <b-input v-model="password" type="password"></b-input>
-                </b-field>
-            </div>
-            <div class=" mb-3">
-                <b-button class="is-pulled-right" @click="login"
-                    id="login" type="is-success">Login</b-button>
-            </div>
+            <form @keyup.enter="login">
+                <div class="mb-3">
+                    <b-field label="E-mail">
+                        <b-input v-model="email"></b-input>
+                    </b-field>
+                </div>
+                <div class="mb-3">
+                    <b-field label="Password">
+                        <b-input v-model="password" type="password"></b-input>
+                    </b-field>
+                </div>
+                <div class=" mb-3">
+                    <b-button class="is-pulled-right" @click="login" id="login"
+                        :loading="isLoading" type="is-success">Login</b-button>
+                </div>
+            </form>
         </div>
     </div>
 </template>
@@ -58,7 +60,8 @@ export default {
                     message: response.data.text,
                     type: 'is-success'
                 });
-                window.location = response.data.redirect;
+                if (response.data.status == 1)
+                    window.location = response.data.redirect;
             }).catch(error => {
                 this.isLoading = false;
                 this.$root.defaultError();
