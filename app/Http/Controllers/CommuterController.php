@@ -38,21 +38,13 @@ class CommuterController extends Controller
         return view('e-scape.commuter.menu', $data);
     }
 
-    public function journey_qr()
+    public function pay_journey()
     {
         $data['css']     = ['global'];
         $data['journey'] = Journey::where('user_id', Auth::user()->id)
             ->where('status', 2)->first();
         $data['uuid']    = Auth::user()->uuid;
         $data['wallet']  = Wallet::where('user_id', Auth::user()->id)->first();
-        return view('e-scape.commuter.e-journey-qr', $data);
-    }
-    
-    public function pay_journey()
-    {
-        $data['css']     = ['global'];
-        $data['journey'] = Journey::where('user_id', Auth::user()->id)
-            ->where('status', 2)->first();
         return view('e-scape.commuter.e-payment', $data);
     }
 
@@ -60,7 +52,7 @@ class CommuterController extends Controller
     {
         $data['css']       = ['global'];
         $data['locations'] = Location::all();
-        return view('e-scape.commuter.e-journey', $data);
+        return view('e-scape.commuter.e-ticket', $data);
     }
 
     public function add_wallet_balance(Request $request)
@@ -89,8 +81,23 @@ class CommuterController extends Controller
         return response()->json($rs);
     }
 
-    public function journey_payment()
+    public function journey_paid(Request $request)
     {
+        $rs = SharedFunctions::default_msg();
+        $query = Journey::where('id', $request->id)->first();
+        if ($query) {
+            $query->status = Journey::STATUS_PAID;
+            $wallet = Wallet::where('user_id', Auth::user()->id)->first();
+            $transaction = Transaction::create([
+                'wallet_id' => $wallet->id,
+                'amount' => $query->amount,
+                'type' => Transaction::TYPE_OPERATOR_PAYMENT
+            ]);
+            $wallet->balance -= $query->amount;
+            if ($query->save() && $transaction && $wallet->save())
+                $rs = SharedFunctions::success_msg('Journey paid successfully!');
+        }
+        return response()->json($rs);
     }
 
     public function register(Request $request)
@@ -103,7 +110,6 @@ class CommuterController extends Controller
             'birthdate' => $request->birthdate,
             'email'     => $request->email,
             'phone'     => $request->phone,
-            'username'  => $request->username,
             'password'  => bcrypt($request->password)
         ]);
         $wallet = Wallet::create(['user_id' => $query->id]);

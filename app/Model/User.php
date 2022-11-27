@@ -10,6 +10,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const TYPE_COMMUTER = 0;
+    const TYPE_OPERATOR = 1;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +25,6 @@ class User extends Authenticatable
         'birthdate',
         'email',
         'phone',
-        'username',
         'password'
     ];
 

@@ -14,23 +14,21 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $commuter = User::create([
-            'user_type' => 0,
-            'fname'     => 'John',
-            'lname'     => 'Smith',
+            'user_type' => User::TYPE_COMMUTER,
+            'fname'     => 'Juan',
+            'lname'     => 'De La Cruz',
             'birthdate' => date('Y-m-d', strtotime('1999-03-01')),
-            'email'     => 'johnsmith@email.com',
+            'email'     => 'commuter@email.com',
             'phone'     => '09123456789',
-            'username'  => 'johnsmith',
             'password'  => bcrypt('password')
         ]);
         $operator = User::create([
-            'user_type' => 1,
-            'fname'     => 'Jane',
-            'lname'     => 'Smith',
+            'user_type' => User::TYPE_OPERATOR,
+            'fname'     => 'Manong',
+            'lname'     => 'Drayber',
             'birthdate' => date('Y-m-d', strtotime('1999-07-05')),
-            'email'     => 'janesmith@email.com',
+            'email'     => 'operator@email.com',
             'phone'     => '09876543210',
-            'username'  => 'janesmith',
             'password'  => bcrypt('password')
         ]);
         Wallet::create(['user_id' => $commuter->id]);

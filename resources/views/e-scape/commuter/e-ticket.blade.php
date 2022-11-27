@@ -9,5 +9,5 @@
 @endsection
 
 @section('content')
-<home></home>
+<commuter-e-ticket :locations="{{ json_encode($locations) }}"></commuter-e-ticket>
 @endsection

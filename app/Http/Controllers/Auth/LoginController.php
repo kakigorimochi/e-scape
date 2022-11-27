@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Libraries\SharedFunctions;
+use App\Model\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -52,22 +53,11 @@ class LoginController extends Controller
             Auth::attempt([
                 'email'     => $request->email,
                 'password'  => $request->password,
-                'user_type' => $request->user_type == 'operator' ? 1 : 0
+                'user_type' => $request->user_type == 'operator'
+                    ? User::TYPE_OPERATOR
+                    : User::TYPE_COMMUTER
             ]);
-        } else if (Auth::attempt([
-            'phone'     => $request->email,
-            'password'  => $request->password,
-            'user_type' => $request->user_type == 'operator' ? 1 : 0
-        ])) {
-            goto login;
-        } else if (Auth::attempt([
-            'username'     => $request->email,
-            'password'  => $request->password,
-            'user_type' => $request->user_type == 'operator' ? 1 : 0
-        ])) {
-            goto login;
         }
-        login:
         if (Auth::check()) {
             $rs = SharedFunctions::success_msg('Logged in successfully!');
             $rs['redirect'] = '/'.$request->user_type.'/index';

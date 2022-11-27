@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="container is-flex is-flex-direction-column mt-6 pb-6">
-            <span class="is-size-3 mb-6">Hello {{ info.fname }}!</span>
+            <span class="is-size-3 mb-6">Hello {{ info.fname + ' ' + info.lname }}!</span>
             <div class="mb-5">
                 <b-button class="is-medium is-fullwidth"
                     @click="sjt" type="is-success">Single Journey Ticket</b-button>
@@ -44,7 +44,7 @@ export default {
             window.location = '/commuter/e-wallet';
         },
         sjt() {
-            if (this.journey) window.location = '/commuter/journey_qr';
+            if (this.journey) window.location = '/commuter/pay_journey';
             else window.location = '/commuter/single-journey-ticket';
         },
         logout() {

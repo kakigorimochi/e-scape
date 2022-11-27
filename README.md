@@ -9,7 +9,7 @@
 
 ## Installation (to-be-updated)
 
-Run `composer install`, `npm install` `php artisan migrate --seed` and in the terminal.
+Run `composer install`, `npm install`, `composer dump-autoload` and `php artisan migrate --seed` in the terminal.
 
 Run `npm run dev` and `php artisan serve` in terminal.
 

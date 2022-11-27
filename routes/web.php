@@ -25,11 +25,11 @@ Route::get('/logout', 'Auth\LoginController@logout');
 Route::prefix('commuter')->group(function () {
     Route::get('e-wallet', 'CommuterController@e_wallet');
     Route::get('index', 'CommuterController@home');
-    Route::get('journey_qr', 'CommuterController@journey_qr');
     Route::get('pay_journey', 'CommuterController@pay_journey');
     Route::get('single-journey-ticket', 'CommuterController@single_journey_ticket');
     Route::post('add_wallet_balance', 'CommuterController@add_wallet_balance');
     Route::post('cancel_journey', 'CommuterController@cancel_journey');
+    Route::post('journey_paid', 'CommuterController@journey_paid');
     Route::post('journey_payment', 'CommuterController@journey_payment');
     Route::post('register_user', 'CommuterController@register');
     Route::post('submit_journey', 'CommuterController@submit_journey');
