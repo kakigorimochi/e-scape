@@ -19,7 +19,7 @@
                     @click="eWallet" type="is-success">E-wallet</b-button>
             </div>
             <div class="mb-5">
-                <b-button class="is-medium is-fullwidth"
+                <b-button class="is-medium is-fullwidth" disabled
                     type="is-success">Rewards</b-button>
             </div>
             <div class="mb-5">
