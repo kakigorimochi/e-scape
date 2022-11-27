@@ -31,7 +31,6 @@ class OperatorController extends Controller
             'birthdate' => $request->birthdate,
             'email'     => $request->email,
             'phone'     => $request->phone,
-            'username'  => $request->username,
             'password'  => bcrypt($request->password)
         ]);
         if ($query) $rs = SharedFunctions::success_msg('Registered successfully!');

@@ -10,12 +10,8 @@
             </div>
         </div>
         <div class="container is-flex is-flex-direction-column mt-6 pb-6">
-            <div class="mb-5">
-                <b-button id="login" @click="login" type="is-success" class="is-medium is-fullwidth">Login</b-button>
-            </div>
-            <div>
-                <b-button id="register" @click="register" type="is-success" class="is-medium is-fullwidth">Sign-Up</b-button>
-            </div>
+            <div class="mb-5"><b-button id="login" @click="login" type="is-success" class="is-medium is-fullwidth">Login</b-button></div>
+            <div><b-button id="register" @click="register" type="is-success" class="is-medium is-fullwidth">Sign-Up</b-button></div>
         </div>
     </div>
 </template>

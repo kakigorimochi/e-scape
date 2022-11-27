@@ -25,9 +25,8 @@
                     </section>
                 </div>
                 <footer class="is-flex is-justify-content-end modal-card-foot">
-                    <b-button class="mr-3" @click="addValue"
-                        :loading="isAddValueLoading" type="is-success">Proceed</b-button>
-                    <b-button @click="isAddValueVisible = false">Close</b-button>
+                    <b-button class="mr-3" @click="isAddValueVisible = false">Close</b-button>
+                    <b-button @click="addValue" :loading="isAddValueLoading" type="is-success">Proceed</b-button>
                 </footer>
             </div>
         </b-modal>
@@ -57,7 +56,11 @@ export default {
                 data: { value: this.value }
             }).then(response => {
                 this.isAddValueLoading = false;
-                this.$buefy.dialog.alert(response.data.text);
+                this.isAddValueVisible = false;
+                this.$buefy.dialog.alert({
+                    message: response.data.text,
+                    type: 'is-success'
+                });
                 this.balance = response.data.new_balance;
             }).catch(error => {
                 this.isAddValueLoading = false;

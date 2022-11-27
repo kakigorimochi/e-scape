@@ -14,42 +14,94 @@
                     @click="cancel" type="is-success is-light">Back</b-button>
             </div>
         </div>
-        <b-modal v-model="isPaymentVisible" :can-cancel="false" :width="480">
-            <div class="card">
-                <div class="card-content">
+        <b-modal v-model="isPaymentVisible" :can-cancel="false" full-screen :width="480">
+            <div class="container p-6">
+                <div class="container">
                     <b-field label="Mode of Payment">
-                        <b-select v-model="modeOfPayment" expanded placeholder="Please select.">
-                            <option label="E-scape" value="e-scape"></option>
-                            <option label="GCash" value="gcash"></option>
-                            <option label="Bank Transfer" value="bank_transfer"></option>
-                        </b-select>
+                        <b-radio v-model="modeOfPayment" native-value="e-scape"
+                            type="is-success">E-scape</b-radio>
+                    </b-field>
+                    <b-field>
+                        <b-radio v-model="modeOfPayment" native-value="gcash"
+                            type="is-success">GCash</b-radio>
+                    </b-field>
+                    <b-field>
+                        <b-radio v-model="modeOfPayment" native-value="bank_transfer"
+                            type="is-success">Bank Transfer</b-radio>
                     </b-field>
                 </div>
-                <footer class="is-flex is-justify-content-end modal-card-foot">
-                    <b-button class="mr-3" @click="payJourney"
-                        :loading="isPaymentLoading" type="is-success">Proceed</b-button>
-                    <b-button @click="isPaymentVisible = false">Close</b-button>
-                </footer>
+                <div class="container is-flex is-justify-content-end p-3">
+                    <b-button class="mr-3" @click="isPaymentVisible = false">Close</b-button>
+                    <b-button @click="payJourney" type="is-success">Proceed</b-button>
+                </div>
+            </div>
+        </b-modal>
+        <b-modal v-model="isQRVisible" :can-cancel="false" full-screen>
+            <div class="container p-6">
+                <div class="is-flex is-justify-content-center mb-5">
+                    <qr-code :size="300" :text="uuid"/>
+                </div>
+                <div class="is-flex is-justify-content-end mb-5">
+                    <span>Payment: <b>PHP {{ journey.amount }}</b></span>
+                </div>
+                <div class="is-flex is-justify-content-end mb-5">
+                    <span>New Balance: <b>PHP {{ wallet.balance - journey.amount }}</b></span>
+                </div>
+                <div class="is-flex is-justify-content-end mb-5">
+                    <span>{{ dateNow }}</span>
+                </div>
+                <div class="is-flex is-justify-content-center">
+                    <b-button class="is-medium" @click="index"
+                        :loading="isPaymentLoading" type="is-success">Done</b-button>
+                </div>
             </div>
         </b-modal>
     </div>
 </template>
 
 <script>
+import moment from 'moment';
+import vueqr from 'vue-qr';
 export default {
+    components: {
+        'qr-code': vueqr
+    },
     data () {
         return {
             isPaymentLoading: false,
             isPaymentVisible: false,
+            isQRVisible: false,
+            dateNow: moment().format('MMMM DD'),
             modeOfPayment: 'e-scape'
         };
     },
     props: {
-        journey: Object
+        journey: Object,
+        uuid: String,
+        wallet: Object
     },
     methods: {
+        index() {
+            this.isPaymentLoading = true;
+            axios({
+                method: 'POST',
+                type: 'JSON',
+                url: '/commuter/journey_paid',
+                data: { id: this.journey.id }
+            }).then(response => {
+                if (response.data.status == 1)
+                    window.location = '/commuter/index';
+            }).catch(error => {
+                this.isPaymentLoading = false;
+                this.$root.defaultError();
+            })
+        },
         payJourney() {
-            window.location = '/commuter/journey_qr';
+            this.$buefy.dialog.confirm({
+                message: 'Are you sure you want to proceed?',
+                type: 'is-success',
+                onConfirm: () => this.isQRVisible = true
+            });
         },
         cancel() {
             axios({

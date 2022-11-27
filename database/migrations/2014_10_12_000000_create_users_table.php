@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->date('birthdate');
             $table->string('email')->unique();
             $table->string('phone', 15);
-            $table->string('username');
             $table->string('password');
             $table->softDeletes();
             $table->timestamps();

@@ -23,9 +23,6 @@
             <b-field label="Phone">
                 <b-input v-model="user.phone" placeholder="ex. 09112345678"></b-input>
             </b-field>
-            <b-field label="Username">
-                <b-input v-model="user.username" placeholder="ex. sample_username"></b-input>
-            </b-field>
             <b-field label="Password">
                 <b-input v-model="user.password" password-reveal type="password"></b-input>
             </b-field>
@@ -48,7 +45,6 @@ export default {
                 birthdate: null,
                 email: null,
                 phone: null,
-                username: null,
                 password: null
             }
         };
@@ -72,7 +68,10 @@ export default {
                 data: this.user
             }).then(response => {
                 this.isSubmitLoading = false;
-                this.$buefy.dialog.alert(response.data.text);
+                this.$buefy.dialog.alert({
+                    message: response.data.text,
+                    type: 'is-success'
+                });
                 window.location = '/' + this.userType;
             }).catch(error => {
                 this.isSubmitLoading = false;

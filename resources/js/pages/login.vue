@@ -21,7 +21,8 @@
                 </b-field>
             </div>
             <div class=" mb-3">
-                <b-button id="login" @click="login" type="is-success" class="is-pulled-right">Login</b-button>
+                <b-button class="is-pulled-right" @click="login"
+                    id="login" type="is-success">Login</b-button>
             </div>
         </div>
     </div>
@@ -53,7 +54,10 @@ export default {
                 }
             }).then(response => {
                 this.isLoading = false;
-                this.$buefy.dialog.alert(response.data.text);
+                this.$buefy.dialog.alert({
+                    message: response.data.text,
+                    type: 'is-success'
+                });
                 window.location = response.data.redirect;
             }).catch(error => {
                 this.isLoading = false;
