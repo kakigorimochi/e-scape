@@ -3,15 +3,59 @@ html {
 }
 html, body {
     font-family: 'Red Hat Text', sans-serif!important;
+    height: 100%;
 }
-body {
-    width: 100vw;
-    height: 100vh;
+#title {
+    text-align: center;
+}
+#title, button span {
+    font-weight: 600;
 }
 #usertype {
     text-transform: capitalize;
 }
+#subheader {
+    height: 64px;
+    display: block;
+    color: #ffffff;
+    border-radius: 20px;
+    background-image: linear-gradient(to bottom, #4ab484 0%, #48c78e 51%, #4ab484 100%);
+    text-align: center;
+    font-weight: 600;
+    padding: 0.6em;
+    margin: 0.5em 0.5em -1em;
+}
+#window {
+    margin: 1.2em;
+    border: 6px solid #36b3b8;
+    position: absolute;
+    top: 20%;
+}
+div .control span.has-text-primary{
+    color: #36b3b8!important;
+}
+.input:hover {
+    border-color: #fbfbfb!important;
+}
 .modal-card.animation-content {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
+    padding-left: 0.75rem!important;
+    padding-right: 0.75rem!important;
+}
+.label {
+    margin-bottom: 0!important;
+}
+.vdatetime-popup__header,
+.vdatetime-calendar__month__day--selected > span > span,
+.vdatetime-calendar__month__day--selected:hover > span > span {
+  background: #36b3b8!important;
+}
+
+.vdatetime-year-picker__item--selected,
+.vdatetime-time-picker__item--selected,
+.vdatetime-popup__actions__button {
+  color: #36b3b8!important;
+}
+.notices .toast.is-danger {
+    color: #fff;
+    background: #f14668;
 }
