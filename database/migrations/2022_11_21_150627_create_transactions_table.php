@@ -17,7 +17,8 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->integer('wallet_id')->unsigned();
             $table->decimal('amount')->default(0);
-            $table->tinyInteger('type');
+            $table->tinyInteger('type')->default(0)->comment('0 = add balance, 1 = operator payment');
+            $table->tinyInteger('status')->default(0)->comment('0 = inactive, 1 = pending');
             $table->timestamps();
 
             $table->foreign('wallet_id')->references('id')->on('wallets')->onDelete('cascade');

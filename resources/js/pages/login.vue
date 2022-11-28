@@ -65,7 +65,7 @@ export default {
             }).catch(error => {
                 this.isLoading = false;
                 this.$root.defaultError();
-            })
+            });
         }
     }
 }

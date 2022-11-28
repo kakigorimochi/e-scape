@@ -9,5 +9,5 @@
 @endsection
 
 @section('content')
-<commuter-e-topup></commuter-e-topup>
+<commuter-e-modeofpayment></commuter-e-modeofpayment>
 @endsection

@@ -3,6 +3,7 @@
 use App\Model\User;
 use App\Model\Wallet;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class UsersSeeder extends Seeder
 {
@@ -13,7 +14,9 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         User::truncate();
+        Schema::enableForeignKeyConstraints();
         $commuter = User::create([
             'user_type' => User::TYPE_COMMUTER,
             'fname'     => 'Juan',

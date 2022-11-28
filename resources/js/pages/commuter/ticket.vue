@@ -87,7 +87,7 @@ export default {
             }).catch(error => {
                 this.isSubmitJorneyLoading = false;
                 this.$root.defaultError();
-            })
+            });
         },
         index() {
             window.location = '/commuter/index';

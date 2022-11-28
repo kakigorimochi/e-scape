@@ -9,5 +9,6 @@
 @endsection
 
 @section('content')
-<commuter-e-topup></commuter-e-topup>
+<commuter-e-newbalance :added-value="{{ json_encode($added_value) }}"
+    :new-balance="{{ json_encode($new_balance) }}"></commuter-e-newbalance>
 @endsection

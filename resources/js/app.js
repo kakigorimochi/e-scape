@@ -32,11 +32,15 @@ Vue.component('index', require('@/pages/index').default);
 Vue.component('login', require('@/pages/login').default);
 Vue.component('register', require('@/pages/register').default);
 
+Vue.component('commuter-e-modeofpayment', require('@/pages/commuter/modeofpayment').default);
+Vue.component('commuter-e-newbalance', require('@/pages/commuter/newbalance').default);
 Vue.component('commuter-e-payment', require('@/pages/commuter/payment').default);
 Vue.component('commuter-e-ticket', require('@/pages/commuter/ticket').default);
+Vue.component('commuter-e-topup', require('@/pages/commuter/topup').default);
 Vue.component('commuter-e-wallet', require('@/pages/commuter/ewallet').default);
 Vue.component('commuter-index', require('@/pages/commuter/index').default);
 
+Vue.component('operator-e-dispatch', require('@/pages/operator/dispatches').default);
 Vue.component('operator-index', require('@/pages/operator/index').default);
 
 /**
@@ -57,7 +61,7 @@ const app = new Vue({
                 duration: 5000,
                 message: msg,
                 position: 'is-bottom',
-                type: 'is-danger'
+                type: 'is-dark'
             });
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libraries\SharedFunctions;
+use App\Model\Dispatch;
 use App\Model\Journey;
 use App\Model\Location;
 use App\Model\Transaction;
@@ -38,6 +39,26 @@ class CommuterController extends Controller
         return view('e-scape.commuter.menu', $data);
     }
 
+    public function mode_of_payment()
+    {
+        $data['css'] = ['global'];
+        return view('e-scape.commuter.e-modeofpayment', $data);
+    }
+
+    public function new_balance()
+    {
+        $wallet = Wallet::where('user_id', Auth::user()->id)->first();
+        $query = Transaction::where('wallet_id', $wallet->id)
+            ->where('type', Transaction::TYPE_ADD_BALANCE)
+            ->where('status', Transaction::STATUS_INACTIVE)
+            ->orderBy('updated_at', 'DESC')
+            ->first();
+        $data['css']         = ['global'];
+        $data['added_value'] = $query->amount;
+        $data['new_balance'] = $wallet->balance;
+        return view('e-scape.commuter.e-newbalance', $data);
+    }
+
     public function pay_journey()
     {
         $data['css']     = ['global'];
@@ -55,6 +76,12 @@ class CommuterController extends Controller
         return view('e-scape.commuter.e-ticket', $data);
     }
 
+    public function topup()
+    {
+        $data['css'] = ['global'];
+        return view('e-scape.commuter.e-topup', $data);
+    }
+
     public function add_wallet_balance(Request $request)
     {
         $rs = SharedFunctions::default_msg();
@@ -63,13 +90,23 @@ class CommuterController extends Controller
         $transact = Transaction::create([
             'wallet_id' => $query->id,
             'amount'    => $request->value,
-            'type'      => Transaction::TYPE_ADD_BALANCE
+            'type'      => Transaction::TYPE_ADD_BALANCE,
+            'status'    => Transaction::STATUS_PENDING
         ]);
-        if ($query && $transact) {
-            $rs = SharedFunctions::success_msg('Successful!');
-            $rs['new_balance'] = Wallet::where('user_id', Auth::user()->id)
-                ->pluck('balance')->first();
-        }
+        if ($query && $transact) $rs = SharedFunctions::success_msg('Pending transaction created successfully!');
+        return response()->json($rs);
+    }
+
+    public function cancel_transaction()
+    {
+        $rs = SharedFunctions::default_msg();
+        $wallet = Wallet::where('user_id', Auth::user()->id)->first();
+        $query = Transaction::where('wallet_id', $wallet->id)
+            ->where('type', Transaction::TYPE_ADD_BALANCE)
+            ->where('status', Transaction::STATUS_PENDING)
+            ->first();
+        $wallet->decrement('balance', $query->amount);
+        if ($query->delete()) $rs = SharedFunctions::success_msg('Cancelled transaction successfully!');
         return response()->json($rs);
     }
 
@@ -90,13 +127,33 @@ class CommuterController extends Controller
             $wallet = Wallet::where('user_id', Auth::user()->id)->first();
             $transaction = Transaction::create([
                 'wallet_id' => $wallet->id,
-                'amount' => $query->amount,
-                'type' => Transaction::TYPE_OPERATOR_PAYMENT
+                'amount'    => $query->amount,
+                'type'      => Transaction::TYPE_OPERATOR_PAYMENT,
+                'status'    => Transaction::STATUS_INACTIVE
             ]);
             $wallet->balance -= $query->amount;
-            if ($query->save() && $transaction && $wallet->save())
+            $dispatch = Dispatch::where('location_id', $query->destination_id)->first();
+            if ($dispatch) $dispatch->tickets++;
+            else {
+                $dispatch = new Dispatch;
+                $dispatch->location_id = $query->destination_id;
+                $dispatch->tickets = 1;
+            }
+            if ($query->save() && $dispatch->save() && $transaction && $wallet->save())
                 $rs = SharedFunctions::success_msg('Journey paid successfully!');
         }
+        return response()->json($rs);
+    }
+
+    public function pay_transaction()
+    {
+        $rs = SharedFunctions::default_msg();
+        $wallet_id = Wallet::where('user_id', Auth::user()->id)->pluck('id')->first();
+        $query = Transaction::where('wallet_id', $wallet_id)
+            ->where('type', Transaction::TYPE_ADD_BALANCE)
+            ->where('status', Transaction::STATUS_PENDING)
+            ->update(['status' => Transaction::STATUS_INACTIVE]);
+        if ($query) $rs = SharedFunctions::success_msg('Journey paid successfully!');
         return response()->json($rs);
     }
 
