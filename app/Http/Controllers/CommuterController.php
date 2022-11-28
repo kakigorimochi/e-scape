@@ -120,6 +120,7 @@ class CommuterController extends Controller
     public function submit_journey(Request $request)
     {
         $rs = SharedFunctions::default_msg();
+        // todo: the amount value
         $query = Journey::create([
             'user_id' => Auth::user()->id,
             'origin_id' => $request->origin_id,
