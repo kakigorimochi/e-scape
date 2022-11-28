@@ -48,14 +48,18 @@ Vue.component('operator-index', require('@/pages/operator/index').default);
 const app = new Vue({
     el: '#app',
     methods: {
+        arrayFind(array, condition) {
+            const item = array.find(condition);
+            return array.indexOf(item);
+        },
         defaultError(msg = 'Oops! Something went wrong.') {
             this.$buefy.toast.open({
                 duration: 5000,
                 message: msg,
                 position: 'is-bottom',
                 type: 'is-danger'
-            })
-        },
+            });
+        }
     }
 });
 
