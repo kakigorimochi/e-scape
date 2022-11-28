@@ -14,20 +14,78 @@
                     @click="home" type="is-success is-light">Back</b-button>
             </div>
         </div>
-        <b-modal v-model="isAddValueVisible" :can-cancel="false" :width="480">
-            <div class="card">
-                <div class="card-content">
-                    <section class="modal-card-body">
-                        <b-field label="Amount">
-                            <b-numberinput v-model="value" controls-alignment="right"
-                                type="is-success"></b-numberinput>
-                        </b-field>
-                    </section>
+        <b-modal v-model="isAddValueVisible" :can-cancel="false" full-screen :width="480">
+            <div class="container p-6">
+                <div class="is-flex is-justify-content-center mb-3">
+                    <b-field grouped group-multiline>
+                        <p class="control">
+                            <b-radio-button v-model="newValue" :native-value="20"
+                                size="is-small" type="is-success is-light is-outlined">
+                                <span>20</span>
+                            </b-radio-button>
+                        </p>
+                        <p class="control">
+                            <b-radio-button v-model="newValue" :native-value="50"
+                                size="is-small" type="is-success is-light is-outlined">
+                                <span>50</span>
+                            </b-radio-button>
+                        </p>
+                        <p class="control">
+                            <b-radio-button v-model="newValue" :native-value="100"
+                                size="is-small" type="is-success is-light is-outlined">
+                                <span>100</span>
+                            </b-radio-button>
+                        </p>
+                        <p class="control">
+                            <b-radio-button v-model="newValue" :native-value="500"
+                                size="is-small" type="is-success is-light is-outlined">
+                                <span>500</span>
+                            </b-radio-button>
+                        </p>
+                        <p class="control">
+                            <b-radio-button v-model="newValue" :native-value="1000"
+                                size="is-small" type="is-success is-light is-outlined">
+                                <span>1000</span>
+                            </b-radio-button>
+                        </p>
+                        <span class="control">
+                            <b-field>
+                                <p class="control">
+                                    <span class="button is-small is-static">Other amount</span>
+                                </p>
+                                <b-numberinput v-model="value" :controls="false"
+                                    controls-position="compact" :min="20" size="is-small"></b-numberinput>
+                            </b-field>
+                        </span>
+                    </b-field>
                 </div>
-                <footer class="is-flex is-justify-content-end modal-card-foot">
-                    <b-button class="mr-3" @click="isAddValueVisible = false">Close</b-button>
+                <div class="is-flex is-justify-content-end">
+                    <b-button class="mr-3" @click="isAddValueVisible = false">Cancel</b-button>
+                    <b-button @click="isPaymentVisible = true"
+                        :disabled="value < 20" type="is-success">Proceed</b-button>
+                </div>
+            </div>
+        </b-modal>
+        <b-modal v-model="isPaymentVisible" :can-cancel="false" full-screen :width="480">
+            <div class="container p-6">
+                <div class="container">
+                    <b-field label="Mode of Payment">
+                        <b-radio v-model="modeOfPayment" native-value="e-scape"
+                            type="is-success">E-scape wallet</b-radio>
+                    </b-field>
+                    <b-field>
+                        <b-radio v-model="modeOfPayment" native-value="gcash"
+                            type="is-success">GCash</b-radio>
+                    </b-field>
+                    <b-field>
+                        <b-radio v-model="modeOfPayment" native-value="bank_transfer"
+                            type="is-success">Bank Transfer</b-radio>
+                    </b-field>
+                </div>
+                <div class="container is-flex is-justify-content-end p-3">
+                    <b-button class="mr-3" @click="isPaymentVisible = false">Cancel</b-button>
                     <b-button @click="addValue" :loading="isAddValueLoading" type="is-success">Proceed</b-button>
-                </footer>
+                </div>
             </div>
         </b-modal>
     </div>
@@ -39,12 +97,21 @@ export default {
         return {
             isAddValueLoading: false,
             isAddValueVisible: false,
+            isPaymentVisible: false,
             balance: this.currentBalance,
+            modeOfPayment: 'e-scape',
+            newValue: 0.00,
             value: 0.00
         };
     },
     props: {
         currentBalance: Number
+    },
+    watch: {
+        newValue(value) {
+            this.value = value;
+            this.isPaymentVisible = true;
+        }
     },
     methods: {
         addValue() {
@@ -56,12 +123,13 @@ export default {
                 data: { value: this.value }
             }).then(response => {
                 this.isAddValueLoading = false;
-                this.isAddValueVisible = false;
                 this.$buefy.dialog.alert({
                     message: response.data.text,
                     type: 'is-success'
                 });
                 this.balance = response.data.new_balance;
+                this.isAddValueVisible = false;
+                this.isPaymentVisible = false;
             }).catch(error => {
                 this.isAddValueLoading = false;
                 this.$root.defaultError();

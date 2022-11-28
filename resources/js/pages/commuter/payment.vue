@@ -7,35 +7,13 @@
             </b-field>
             <div class="mb-5">
                 <b-button class="is-medium is-fullwidth"
-                    @click="isPaymentVisible = true" type="is-success">Next</b-button>
+                    @click="confirmPay" type="is-success">Next</b-button>
             </div>
             <div class="mb-5">
                 <b-button class="is-medium is-fullwidth"
                     @click="cancel" type="is-success is-light">Back</b-button>
             </div>
         </div>
-        <b-modal v-model="isPaymentVisible" :can-cancel="false" full-screen :width="480">
-            <div class="container p-6">
-                <div class="container">
-                    <b-field label="Mode of Payment">
-                        <b-radio v-model="modeOfPayment" native-value="e-scape"
-                            type="is-success">E-scape</b-radio>
-                    </b-field>
-                    <b-field>
-                        <b-radio v-model="modeOfPayment" native-value="gcash"
-                            type="is-success">GCash</b-radio>
-                    </b-field>
-                    <b-field>
-                        <b-radio v-model="modeOfPayment" native-value="bank_transfer"
-                            type="is-success">Bank Transfer</b-radio>
-                    </b-field>
-                </div>
-                <div class="container is-flex is-justify-content-end p-3">
-                    <b-button class="mr-3" @click="isPaymentVisible = false">Close</b-button>
-                    <b-button @click="payJourney" type="is-success">Proceed</b-button>
-                </div>
-            </div>
-        </b-modal>
         <b-modal v-model="isQRVisible" :can-cancel="false" full-screen>
             <div class="container p-6">
                 <div class="is-flex is-justify-content-center mb-5">
@@ -51,7 +29,7 @@
                     <span>{{ dateNow }}</span>
                 </div>
                 <div class="is-flex is-justify-content-center">
-                    <b-button class="is-medium" @click="index"
+                    <b-button class="is-medium" @click="payJourney"
                         :loading="isPaymentLoading" type="is-success">Done</b-button>
                 </div>
             </div>
@@ -69,7 +47,6 @@ export default {
     data () {
         return {
             isPaymentLoading: false,
-            isPaymentVisible: false,
             isQRVisible: false,
             dateNow: moment().format('MMMM DD'),
             modeOfPayment: 'e-scape'
@@ -81,7 +58,14 @@ export default {
         wallet: Object
     },
     methods: {
-        index() {
+        confirmPay() {
+            this.$buefy.dialog.confirm({
+                message: 'Are you sure you want to proceed?',
+                type: 'is-success',
+                onConfirm: () => this.isQRVisible = true
+            });
+        },
+        payJourney() {
             this.isPaymentLoading = true;
             axios({
                 method: 'POST',
@@ -95,13 +79,6 @@ export default {
                 this.isPaymentLoading = false;
                 this.$root.defaultError();
             })
-        },
-        payJourney() {
-            this.$buefy.dialog.confirm({
-                message: 'Are you sure you want to proceed?',
-                type: 'is-success',
-                onConfirm: () => this.isQRVisible = true
-            });
         },
         cancel() {
             axios({
