@@ -1,9 +1,3 @@
-body {
-    background-image: url(../img/commuter.png), url(../img/bus.png);
-    background-repeat: no-repeat;
-    background-position: -3em 32em, 10em 25.5em;
-    background-size: 18em, 32em;
-}
 input.input{
     border-color: white white #555;
     background-color: #fff!important;
@@ -17,7 +11,7 @@ input.input:active {
     background-color: rgb(250, 250, 250)!important;
     box-shadow: inset 0 0.0625em 0.125em rgb(10 10 10 / 5%);
 }
-button#login {
+button#register {
     width: 7.5em;
     height: 2.1em;
     border-radius: 10px;

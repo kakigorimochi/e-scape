@@ -1,0 +1,35 @@
+#balance .label {
+    font-size: 18px;
+}
+#balance .input,
+#balance p#currency span.button {
+    height: 1.2em;
+    color: #363636;
+    font-size: 32px;
+}
+#balance p#currency span.button {
+    padding: 0 0 0 1.8em;
+}
+#balance p#currency span.button,
+#balance [disabled].input {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+button#addvalue {
+    width: 7.5em;
+    background-color: #36b3b8;
+    border-radius: 25px;
+    margin: auto;
+    margin-top: 1.2em;
+}
+button#back {
+    width: 7.5em;
+    height: 2.1em;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -100%;
+    left: -10%;
+}
+

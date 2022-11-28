@@ -22,15 +22,15 @@ class CommuterController extends Controller
 
     public function e_wallet()
     {
-        $data['css']     = ['global'];
-        $data['balance'] = floatval(Wallet::where('user_id', Auth::user()->id)
-            ->pluck('balance')->first());
+        $data['css']     = ['global', 'commuter/wallet'];
+        $data['balance'] = Wallet::where('user_id', Auth::user()->id)
+            ->pluck('balance')->first();
         return view('e-scape.commuter.e-wallet', $data);
     }
 
     public function home()
     {
-        $data['css']     = ['global'];
+        $data['css']     = ['global', 'commuter/home'];
         $data['info']    = Auth::user();
         $data['journey'] = false;
         if (Journey::where('user_id', Auth::user()->id)->where('status', 2)->first())

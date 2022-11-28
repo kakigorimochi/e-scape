@@ -1,11 +1,8 @@
 body {
     background-image: url(../img/commuter.png), url(../img/bus.png);
     background-repeat: no-repeat;
-    background-position: -6em 35em, 8em 25em;
-    background-size: 25em, 45em;
-}
-#title, button span {
-    font-weight: 600;
+    background-position: -3em 32em, 10em 25.5em;
+    background-size: 18em, 32em;
 }
 button#comm, button#optr {
     height: 72px;
