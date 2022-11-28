@@ -13,6 +13,7 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
+        User::truncate();
         $commuter = User::create([
             'user_type' => User::TYPE_COMMUTER,
             'fname'     => 'Juan',
