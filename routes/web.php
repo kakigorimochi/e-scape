@@ -15,14 +15,17 @@ use Illuminate\Support\Facades\Route;
 | it will not work properly. -nikendozo
 */
 
-Route::get('/', 'HomeController@home');
-Route::get('/commuter', 'CommuterController@index');
-Route::get('/index', 'HomeController@home');
-Route::get('/{user_type}/login', 'HomeController@login');
-Route::get('/{user_type}/register', 'HomeController@register');
-Route::get('/operator', 'OperatorController@index');
 Route::get('/logout', 'Auth\LoginController@logout');
-Route::prefix('commuter')->group(function () {
+Route::post('/login', 'Auth\LoginController@custom_login');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', 'HomeController@home');
+    Route::get('/commuter', 'CommuterController@index');
+    Route::get('/index', 'HomeController@home');
+    Route::get('/{user_type}/login', 'HomeController@login');
+    Route::get('/{user_type}/register', 'HomeController@register');
+    Route::get('/operator', 'OperatorController@index');
+});
+Route::prefix('commuter')->middleware(['check_auth'])->group(function () {
     Route::get('e-wallet', 'CommuterController@e_wallet');
     Route::get('index', 'CommuterController@home');
     Route::get('pay_journey', 'CommuterController@pay_journey');
@@ -34,8 +37,7 @@ Route::prefix('commuter')->group(function () {
     Route::post('register_user', 'CommuterController@register');
     Route::post('submit_journey', 'CommuterController@submit_journey');
 });
-Route::prefix('operator')->group(function () {
+Route::prefix('operator')->middleware(['check_auth'])->group(function () {
     Route::get('index', 'OperatorController@home');
     Route::post('register_user', 'OperatorController@register');
 });
-Route::post('/login', 'Auth\LoginController@custom_login');

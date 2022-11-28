@@ -9,7 +9,7 @@ use App\Model\Transaction;
 use App\Model\User;
 use App\Model\Wallet;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class CommuterController extends Controller
 {
