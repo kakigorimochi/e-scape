@@ -57,7 +57,7 @@ const app = new Vue({
                 duration: 5000,
                 message: msg,
                 position: 'is-bottom',
-                type: 'is-danger'
+                type: 'is-dark'
             });
         }
     }

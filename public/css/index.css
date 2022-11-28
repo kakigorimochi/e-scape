@@ -1,8 +1,8 @@
 body {
     background-image: url(../img/commuter.png), url(../img/bus.png);
     background-repeat: no-repeat;
-    background-position: -6em 35em, 8em 25em;
-    background-size: 25em, 45em;
+    background-position: -3em 32em, 10em 25.5em;
+    background-size: 18em, 32em;
 }
 #title, button span {
     font-weight: 600;
@@ -11,5 +11,5 @@ button#login, button#register {
     height: 72px;
     border-radius: 20px;
     font-size: 22px;
-    background-image: linear-gradient(to bottom, #4ab484 0%, #48c78e 51%, #4ab484 100%) ;
+    background-image: linear-gradient(to bottom, #4ab484 0%, #48c78e 51%, #4ab484 100%);
 }
