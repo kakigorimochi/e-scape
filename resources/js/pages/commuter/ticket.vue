@@ -79,7 +79,8 @@ export default {
                 type: 'JSON',
                 url: '/commuter/submit_journey',
                 data: { origin_id: this.originID,
-                    destination_id: this.destinationID }
+                    destination_id: this.destinationID,
+                    origin_type: this.originType }
             }).then(response => {
                 this.isSubmitJorneyLoading = false;
                 if (response.data.status == 1)

@@ -19,6 +19,7 @@ class CreateJourneysTable extends Migration
             $table->integer('origin_id')->unsigned();
             $table->integer('destination_id')->unsigned();
             $table->decimal('amount')->default(0);
+            $table->tinyInteger('origin_type')->default(0)->comment('0 = northbound, 1 southbound');
             $table->tinyInteger('status')->default(0)->comment('0 = cancelled, 1 = paid, 2 = pending');
             $table->timestamps();
 
