@@ -92,7 +92,7 @@ export default {
                     window.location = '/commuter/index';
             }).catch(error => {
                 this.isPaymentLoading = false;
-                this.$root.defaultError();
+                this.$root.prompt();
             });
         },
         cancel() {
@@ -105,7 +105,7 @@ export default {
                 if (response.data.status == 1)
                     window.location = '/commuter/single-journey-ticket';
             }).catch(error => {
-                this.$root.defaultError();
+                this.$root.prompt();
             });
         }
     }

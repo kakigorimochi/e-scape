@@ -58,15 +58,12 @@ export default {
                 }
             }).then(response => {
                 this.isLoading = false;
-                this.$buefy.dialog.alert({
-                    message: response.data.text,
-                    type: 'is-success'
-                });
+                this.$root.prompt(response.data.text);
                 if (response.data.status == 1)
                     window.location = response.data.redirect;
             }).catch(error => {
                 this.isLoading = false;
-                this.$root.defaultError();
+                this.$root.prompt();
             });
         }
     }

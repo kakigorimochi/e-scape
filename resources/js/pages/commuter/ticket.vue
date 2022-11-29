@@ -87,7 +87,7 @@ export default {
                     window.location = '/commuter/pay_journey';
             }).catch(error => {
                 this.isSubmitJorneyLoading = false;
-                this.$root.defaultError();
+                this.$root.prompt();
             });
         },
         index() {

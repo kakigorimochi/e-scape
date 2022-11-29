@@ -91,7 +91,7 @@ export default {
                 // this.isAddValueLoading = false;
             }).catch(error => {
                 this.isAddValueLoading = false;
-                this.$root.defaultError();
+                this.$root.prompt();
             });
         },
         eWallet() {
