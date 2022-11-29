@@ -1,0 +1,13 @@
+button#sjticket, button#wallet,
+button#rewards, button#logout {
+    height: 72px;
+    border-radius: 20px;
+    font-size: 22px;
+}
+button#sjticket, button#wallet, button#rewards {
+    background-image: linear-gradient(to bottom, #4ab484 0%, #48c78e 51%, #4ab484 100%) ;
+}
+button#logout {
+    color: #333;
+    border: 5px solid #48c78e;
+}

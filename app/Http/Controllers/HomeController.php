@@ -24,7 +24,7 @@ class HomeController extends Controller
 
     public function register($user_type)
     {
-        $data['css'] = ['global'];
+        $data['css'] = ['global', 'register'];
         $data['user_type'] = $user_type;
         return view('e-scape.e-register', $data);
     }
