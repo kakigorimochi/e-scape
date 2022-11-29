@@ -7,13 +7,34 @@
             </b-field>
             <div class="mb-5">
                 <b-button class="is-medium is-fullwidth"
-                    @click="confirmPay" type="is-success">Next</b-button>
+                    @click="isConfirmPaymentVisible = true" type="is-success">Next</b-button>
             </div>
             <div class="mb-5">
                 <b-button class="is-medium is-fullwidth"
                     @click="cancel" type="is-success is-light">Back</b-button>
             </div>
         </div>
+        <b-modal v-model="isConfirmPaymentVisible" :can-cancel="false" full-screen>
+            <div class="container p-6">
+                <div class="is-flex is-justify-content-center mb-5">
+                    <span class="is-size-3">Single Journey Ticket</span>
+                </div>
+                <div class="is-flex is-justify-content-center mb-5">
+                    <span><b>{{ journey == 1 ? 'Southbound' : 'Northbound' }}</b></span>
+                </div>
+                <div class="is-flex is-justify-content-center mb-5">
+                    <span class="mr-3">Origin: <b>{{ journey.origin }}</b></span>
+                    <span>Destination: <b>{{ journey.destination }}</b></span>
+                </div>
+                <div class="is-flex is-justify-content-center mb-5">
+                    <span class="is-size-3">Are you sure you want to proceed?</span>
+                </div>
+                <div class="is-flex is-justify-content-end">
+                    <b-button class="mr-3" @click="isConfirmPaymentVisible = false" type="is-light">Cancel</b-button>
+                    <b-button @click="isQRVisible = true, isConfirmPaymentVisible = false" type="is-success">Proceed</b-button>
+                </div>
+            </div>
+        </b-modal>
         <b-modal v-model="isQRVisible" :can-cancel="false" full-screen>
             <div class="container p-6">
                 <div class="is-flex is-justify-content-center mb-5">
@@ -46,6 +67,7 @@ export default {
     },
     data () {
         return {
+            isConfirmPaymentVisible: false,
             isPaymentLoading: false,
             isQRVisible: false,
             dateNow: moment().format('MMMM DD'),
@@ -58,13 +80,6 @@ export default {
         wallet: Object
     },
     methods: {
-        confirmPay() {
-            this.$buefy.dialog.confirm({
-                message: 'Are you sure you want to proceed?',
-                type: 'is-success',
-                onConfirm: () => this.isQRVisible = true
-            });
-        },
         payJourney() {
             this.isPaymentLoading = true;
             axios({

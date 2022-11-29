@@ -61,11 +61,13 @@ class CommuterController extends Controller
 
     public function pay_journey()
     {
-        $data['css']     = ['global'];
-        $data['journey'] = Journey::where('user_id', Auth::user()->id)
-            ->where('status', 2)->first();
-        $data['uuid']    = Auth::user()->uuid;
-        $data['wallet']  = Wallet::where('user_id', Auth::user()->id)->first();
+        $journey              = Journey::where('user_id', Auth::user()->id)->where('status', 2)->first();
+        $journey->origin      = Location::where('id', $journey->origin_id)->pluck('name')->first();
+        $journey->destination = Location::where('id', $journey->destination_id)->pluck('name')->first();
+        $data['css']          = ['global'];
+        $data['journey']      = $journey;
+        $data['uuid']         = Auth::user()->uuid;
+        $data['wallet']       = Wallet::where('user_id', Auth::user()->id)->first();
         return view('e-scape.commuter.e-payment', $data);
     }
 
@@ -179,11 +181,12 @@ class CommuterController extends Controller
         $rs = SharedFunctions::default_msg();
         // todo: the amount value
         $query = Journey::create([
-            'user_id' => Auth::user()->id,
-            'origin_id' => $request->origin_id,
+            'user_id'        => Auth::user()->id,
+            'origin_id'      => $request->origin_id,
             'destination_id' => $request->destination_id,
-            'amount' => rand(10, 70),
-            'status' => Journey::STATUS_PENDING
+            'amount'         => rand(10, 70),
+            'origin_type'    => $request->origin_type,
+            'status'         => Journey::STATUS_PENDING
         ]);
         if ($query) $rs = SharedFunctions::success_msg('Journey created successfully!');
         return response()->json($rs);
