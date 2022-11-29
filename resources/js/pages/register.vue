@@ -80,7 +80,7 @@ export default {
     },
     computed: {
         selectedBirthdate() {
-            return this.user.birthdate ? this.user.birthdate.toDateString() : ''
+            return this.user.birthdate ? this.user.birthdate.toDateString() : '';
         }
     },
     methods: {
@@ -103,7 +103,7 @@ export default {
             }).catch(error => {
                 this.isSubmitLoading = false;
                 this.$root.defaultError();
-            })
+            });
         }
     }
 }

@@ -9,5 +9,5 @@
 @endsection
 
 @section('content')
-<operator-index></operator-index>
+<operator-index :info="{{ json_encode($info) }}"></operator-index>
 @endsection

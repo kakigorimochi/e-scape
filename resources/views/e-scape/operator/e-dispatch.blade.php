@@ -9,5 +9,5 @@
 @endsection
 
 @section('content')
-<home></home>
+<operator-e-dispatch :dispatches="{{ json_encode($dispatches) }}"></operator-e-dispatch>
 @endsection

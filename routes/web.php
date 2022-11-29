@@ -26,9 +26,14 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/operator', 'OperatorController@index');
 });
 Route::prefix('commuter')->middleware(['check_auth'])->group(function () {
+    Route::get('cancel_transaction', 'CommuterController@cancel_transaction');
     Route::get('e-wallet', 'CommuterController@e_wallet');
     Route::get('index', 'CommuterController@home');
+    Route::get('mode_of_payment', 'CommuterController@mode_of_payment');
+    Route::get('new_balance', 'CommuterController@new_balance');
     Route::get('pay_journey', 'CommuterController@pay_journey');
+    Route::get('pay_transaction', 'CommuterController@pay_transaction');
+    Route::get('topup', 'CommuterController@topup');
     Route::get('single-journey-ticket', 'CommuterController@single_journey_ticket');
     Route::post('add_wallet_balance', 'CommuterController@add_wallet_balance');
     Route::post('cancel_journey', 'CommuterController@cancel_journey');
@@ -39,5 +44,6 @@ Route::prefix('commuter')->middleware(['check_auth'])->group(function () {
 });
 Route::prefix('operator')->middleware(['check_auth'])->group(function () {
     Route::get('index', 'OperatorController@home');
+    Route::get('dispatches', 'OperatorController@dispatches');
     Route::post('register_user', 'OperatorController@register');
 });

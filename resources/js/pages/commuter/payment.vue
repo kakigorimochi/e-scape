@@ -78,7 +78,7 @@ export default {
             }).catch(error => {
                 this.isPaymentLoading = false;
                 this.$root.defaultError();
-            })
+            });
         },
         cancel() {
             axios({
@@ -91,7 +91,7 @@ export default {
                     window.location = '/commuter/single-journey-ticket';
             }).catch(error => {
                 this.$root.defaultError();
-            })
+            });
         }
     }
 }
