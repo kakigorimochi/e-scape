@@ -9,7 +9,7 @@
                         {{ props.row.name }}
                     </b-table-column>
                     <b-table-column label="No. of tickets bought" v-slot="props">
-                        {{ props.row.tickets }}
+                        {{ props.row.tickets ? props.row.tickets : 0 }}
                     </b-table-column>
                 </b-table>
             </div>
