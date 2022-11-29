@@ -1,0 +1,13 @@
+#window {
+    width: 90.7%;
+    position: absolute;
+    top: 20%;
+}
+button#back {
+    width: 7.5em;
+    height: 2.1em;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -201.7%;
+    right: -10%;
+}
