@@ -28,7 +28,7 @@ export default {
         };
     },
     props: {
-        dispatches: Array,
+        dispatches: Array
     },
     mounted() {
         this.time = this.printtime();
