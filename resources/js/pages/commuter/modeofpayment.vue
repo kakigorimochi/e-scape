@@ -4,15 +4,18 @@
         <div class="container is-flex is-flex-direction-column mt-6 mb-3">
             <div id="mopgroup">
                 <b-field>
-                    <b-radio v-model="modeOfPayment" native-value="e-scape"
-                    type="is-success" @checked="eggnog">Cash-In with Driver</b-radio>
+                    <b-radio v-model="modeOfPayment" native-value="pay_cash"
+                    :style="[modeOfPayment === 'pay_cash' ? {'font-weight': 600} : {}]"
+                    type="is-success">Pay with Cash</b-radio>
                 </b-field>
                 <b-field>
                     <b-radio v-model="modeOfPayment" native-value="gcash"
+                    :style="[modeOfPayment === 'gcash' ? {'font-weight': 600} : {}]"
                     type="is-success">GCash E-wallet</b-radio>
                 </b-field>
                 <b-field>
                     <b-radio v-model="modeOfPayment" native-value="bank_transfer"
+                    :style="[modeOfPayment === 'bank_transfer' ? {'font-weight': 600} : {}]"
                     type="is-success">Bank Transfer via InstaPay</b-radio>
                 </b-field>
             </div>
@@ -34,13 +37,10 @@ export default {
         return {
             isAddValueLoading: false,
             isCancelTransactionLoading: false,
-            modeOfPayment: 'e-scape'
+            modeOfPayment: 'pay_cash'
         };
     },
     methods: {
-        eggnog() {
-            console.log(this.checked);
-        },
         eWallet() {
             this.isCancelTransactionLoading = true;
             axios.get('/commuter/cancel_transaction').then(() => {

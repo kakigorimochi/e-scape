@@ -44,7 +44,7 @@ class LoginController extends Controller
 
     public function custom_login(Request $request)
     {
-        $rs = SharedFunctions::prompt_msg('Login failed! Please try again.');
+        $rs = SharedFunctions::prompt_msg('Login failed');
         $this->validate($request, [
             'email' => 'required|max:120',
             'password' => 'required|max:255'
@@ -59,7 +59,7 @@ class LoginController extends Controller
             ]);
         }
         if (Auth::check()) {
-            $rs = SharedFunctions::success_msg('Logged in successfully!');
+            $rs = SharedFunctions::success_msg('Login success');
             $rs['redirect'] = '/'.$request->user_type.'/index';
         }
         return response()->json($rs);

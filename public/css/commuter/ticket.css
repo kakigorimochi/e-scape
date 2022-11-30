@@ -1,0 +1,43 @@
+#window {
+    width: 99.7%;
+    position: absolute;
+    top: 15%;
+    margin: auto;
+    border: none;
+}
+#subheader {
+    padding: 0.2em;
+    margin: 0.5em 2.1em -1em;
+}
+#subheader p {
+    font-size: 12px;
+    color: #6a6a6a;
+    letter-spacing: 0.05em;
+    margin-top: -2px;
+}
+.select select:active,
+.select select:focus {
+    border-color: #36b3b8!important;
+    box-shadow: none!important;
+}
+.select:not(.is-multiple):not(.is-loading)::after,
+.select:not(.is-multiple):not(.is-loading):hover::after {
+    border-color: #36b3b8!important;
+}
+.select.is-empty select {
+    color: rgba(122, 122, 122, 0.00);
+}
+button#proceed,
+button#back {
+    width: 7.5em;
+    height: 2.1em;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -145.4%;
+}
+button#proceed {
+    right: -1.9%;
+}
+button#back {
+    left: -1.7%;
+}

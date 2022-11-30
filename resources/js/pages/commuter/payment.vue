@@ -1,57 +1,67 @@
 <template>
-    <div class="container pt-6 px-6">
-        <span class="is-size-1">Fare</span>
-        <div class="container is-flex is-flex-direction-column mt-6 pb-6">
-            <b-field class="mb-5" label="Amount">
+    <div class="container pt-5 px-5" id="window">
+        <span id="subheader" class="is-size-4 text-centered">Fare</span>
+        <div class="container is-flex is-flex-direction-column mt-6 pb-3">
+            <b-field id="amount" class="mb-5" label="Amount:">
+                <p class="control" id="currency">
+                    <span class="button is-static">PHP</span>
+                </p>
                 <b-input v-model="journey.amount" disabled></b-input>
             </b-field>
             <div class="mb-5">
-                <b-button class="is-medium is-fullwidth"
-                    @click="isConfirmPaymentVisible = true" type="is-success">Next</b-button>
+                <b-button id="next" class="is-medium is-fullwidth"
+                @click="isConfirmPaymentVisible = true" type="is-success">Next</b-button>
             </div>
             <div class="mb-5">
-                <b-button class="is-medium is-fullwidth"
-                    @click="cancel" type="is-success is-light">Back</b-button>
+                <b-button id="back" class="is-medium is-fullwidth"
+                @click="cancel" type="is-success">Back</b-button>
             </div>
         </div>
         <b-modal v-model="isConfirmPaymentVisible" :can-cancel="false" full-screen>
-            <div class="container p-6">
-                <div class="is-flex is-justify-content-center mb-5">
-                    <span class="is-size-3">Single Journey Ticket</span>
+            <div id="confirmation" class="container pt-4 px-4">
+                <span id="subheader" class="is-size-4 text-centered">Journey Details <br><p>{{ journey == 1 ? 'Southbound' : 'Northbound' }}</p></span>
+                <div class="is-flex is-justify-content-center mt-6">
+                    <div class="has-text-centered mx-5">
+                        <strong>{{ journey.origin }}</strong>
+                        <br>Point of Origin
+                    </div>
                 </div>
-                <div class="is-flex is-justify-content-center mb-5">
-                    <span><b>{{ journey == 1 ? 'Southbound' : 'Northbound' }}</b></span>
+                <div class="is-flex is-justify-content-center mt-4 pb-5">
+                    <div class="has-text-centered mx-5">
+                        <strong>{{ journey.destination }}</strong>
+                        <br>Destination
+                    </div>
                 </div>
-                <div class="is-flex is-justify-content-center mb-5">
-                    <span class="mr-3">Origin: <b>{{ journey.origin }}</b></span>
-                    <span>Destination: <b>{{ journey.destination }}</b></span>
+                <div class="mb-4">
+                    <b-button id="confirm" class="is-medium is-fullwidth"
+                    @click="isQRVisible = true, isConfirmPaymentVisible = false"
+                    type="is-success">Confirm</b-button>
                 </div>
-                <div class="is-flex is-justify-content-center mb-5">
-                    <span class="is-size-3">Are you sure you want to proceed?</span>
-                </div>
-                <div class="is-flex is-justify-content-end">
-                    <b-button class="mr-3" @click="isConfirmPaymentVisible = false" type="is-light">Cancel</b-button>
-                    <b-button @click="isQRVisible = true, isConfirmPaymentVisible = false" type="is-success">Proceed</b-button>
+                <div class="mb-5">
+                    <b-button id="cancel" class="is-medium is-fullwidth"
+                    @click="isConfirmPaymentVisible = false" type="is-success">Cancel</b-button>
                 </div>
             </div>
         </b-modal>
         <b-modal v-model="isQRVisible" :can-cancel="false" full-screen>
-            <div class="container p-6">
-                <div class="is-flex is-justify-content-center mb-5">
-                    <qr-code :size="300" :text="uuid"/>
+            <div id="boarding" class="container pt-4 px-4">
+                <div id="qrcode" class="is-flex is-justify-content-center mb-3">
+                    <qr-code :size="384" :text="uuid"/>
                 </div>
-                <div class="is-flex is-justify-content-end mb-5">
-                    <span>Payment: <b>PHP {{ journey.amount }}</b></span>
+                <div id="deets" class="is-flex is-justify-content-center mt-4 pb-6">
+                    <div class="column">
+                        <span>Amount Paid:<br></span>
+                        <span>Remaining Balance:<br></span>
+                    </div>
+                    <div class="column has-text-right">
+                        <span><strong>PHP {{ journey.amount }}</strong><br></span>
+                        <span><strong>PHP {{ wallet.balance - journey.amount }}</strong><br></span>
+                        <span id="date">{{ dateNow }}</span>
+                    </div>
                 </div>
-                <div class="is-flex is-justify-content-end mb-5">
-                    <span>New Balance: <b>PHP {{ wallet.balance - journey.amount }}</b></span>
-                </div>
-                <div class="is-flex is-justify-content-end mb-5">
-                    <span>{{ dateNow }}</span>
-                </div>
-                <div class="is-flex is-justify-content-center">
-                    <b-button class="is-medium" @click="payJourney"
-                        :loading="isPaymentLoading" type="is-success">Done</b-button>
+                <div class="mb-5">
+                    <b-button id="finish" class="is-medium is-fullwidth"
+                    @click="payJourney" :loading="isPaymentLoading" type="is-success">Done</b-button>
                 </div>
             </div>
         </b-modal>
@@ -70,7 +80,7 @@ export default {
             isConfirmPaymentVisible: false,
             isPaymentLoading: false,
             isQRVisible: false,
-            dateNow: moment().format('MMMM DD'),
+            dateNow: moment().format('MMMM DD, YYYY'),
             modeOfPayment: 'e-scape'
         };
     },

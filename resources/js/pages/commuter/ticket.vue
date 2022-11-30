@@ -1,39 +1,41 @@
 <template>
-    <div class="container pt-6 px-6">
-        <div class="container is-flex is-flex-direction-column mt-4 pb-6">
-            <div class="mb-6">
-                <b-field>
-                    <b-radio-button v-model="originType" expanded :native-value="0"
-                        type="is-success is-light is-outlined">
-                        <span>North Bound</span>
-                    </b-radio-button>
-                    <b-radio-button v-model="originType" expanded :native-value="1"
-                        type="is-success is-light is-outlined">
-                        <span>South Bound</span>
-                    </b-radio-button>
-                </b-field>
-            </div>
-            <span class="is-size-3 mb-3">Single Journey Ticket (Origin)</span>
-            <div class="mb-5">
-                <b-select v-model="originID" expanded placeholder="Please select.">
+    <div class="container pt-3 px-5" id="window">
+        <div class="container is-flex is-flex-direction-column mt-6 pb-5">
+            <b-field>
+                <b-radio-button v-model="originType" expanded :native-value="0"
+                    type="is-success is-light is-outlined">
+                    <span>North Bound</span>
+                </b-radio-button>
+                <b-radio-button v-model="originType" expanded :native-value="1"
+                    type="is-success is-light is-outlined">
+                    <span>South Bound</span>
+                </b-radio-button>
+            </b-field>
+        </div>
+        <span id="subheader" class="is-size-4 text-centered">Single Journey Ticket <br><p>(Point of Origin)</p></span>
+        <div class="container is-flex is-flex-direction-column mt-4 pb-5">
+            <div class="mt-5">
+                <b-select v-model="originID" expanded placeholder="Select point of origin...">
                     <option v-for="(item, index) in locations" :key="index"
-                        :label="item.name" :value="item.id"></option>
+                    :label="item.name" :value="item.id"></option>
                 </b-select>
             </div>
-            <span class="is-size-3 mb-3">Single Journey Ticket (Destination)</span>
-            <div class="mb-5">
-                <b-select v-model="destinationID" expanded placeholder="Please select.">
+        </div>
+        <span id="subheader" class="is-size-4 text-centered">Single Journey Ticket <br><p>(Destination)</p></span>
+        <div class="container is-flex is-flex-direction-column mt-4">
+            <div class="mt-5">
+                <b-select v-model="destinationID" expanded placeholder="Select destination...">
                     <option v-for="(item, index) in destinations" :key="index"
-                        :label="item.name" :value="item.id"></option>
+                    :label="item.name" :value="item.id"></option>
                 </b-select>
             </div>
-            <div class="mb-5">
-                <b-button class="is-medium is-fullwidth"
-                    @click="submitJourney" type="is-success">Proceed</b-button>
+            <div class="mb-4">
+                <b-button id="proceed" class="is-medium is-fullwidth"
+                @click="submitJourney" type="is-success">Proceed</b-button>
             </div>
             <div class="mb-5">
-                <b-button class="is-medium is-fullwidth"
-                    @click="index" type="is-success is-light">Back</b-button>
+                <b-button id="back" class="is-medium is-fullwidth"
+                @click="index" type="is-success">Back</b-button>
             </div>
         </div>
     </div>

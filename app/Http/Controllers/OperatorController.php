@@ -50,7 +50,7 @@ class OperatorController extends Controller
             'phone'     => $request->phone,
             'password'  => bcrypt($request->password)
         ]);
-        if ($query) $rs = SharedFunctions::success_msg('Registered successfully!');
+        if ($query) $rs = SharedFunctions::success_msg('Register success');
         return response()->json($rs);
     }
 }
