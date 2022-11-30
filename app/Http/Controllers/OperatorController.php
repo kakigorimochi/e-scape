@@ -20,7 +20,7 @@ class OperatorController extends Controller
 
     public function dispatches()
     {
-        $data['css']        = ['global'];
+        $data['css']        = ['global', 'operator/dispatch'];
         $data['dispatches'] = Location::all()
             ->map(function($q) {
                 $q->tickets = Dispatch::where('location_id', $q->id)
@@ -33,7 +33,7 @@ class OperatorController extends Controller
 
     public function home()
     {
-        $data['css']  = ['global'];
+        $data['css']  = ['global', 'operator/home'];
         $data['info'] = Auth::user();
         return view('e-scape.operator.menu', $data);
     }
