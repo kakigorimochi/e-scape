@@ -3,7 +3,7 @@
         <span id="subheader" class="is-size-4 text-centered">E-wallet</span>
         <div class="container is-flex is-flex-direction-column mt-6">
             <div class="is-flex is-flex-direction-column">
-                <p>Balance: <b>PHP {{ newBalance - addedValue }}</b></p>
+                <p>Balance: <b>PHP {{ parseFloat(newBalance - addedValue).toFixed(2) }}</b></p>
                 <p>Added Value: <b>PHP {{ addedValue }}</b></p>
                 <p>Total: <b>PHP {{ newBalance }}</b></p>
             </div>
