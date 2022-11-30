@@ -42,7 +42,7 @@ class OperatorController extends Controller
 
     public function unlock_index()
     {
-        $rs = SharedFunctions::success_msg('Unlocked successfully!');
+        $rs = SharedFunctions::success_msg('Please wait');
         Session::put('is_unlocked', true);
         return response()->json($rs);
     }

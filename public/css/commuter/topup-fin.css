@@ -3,11 +3,46 @@
     position: absolute;
     top: 20%;
 }
+#balance .label {
+    font-size: 18px;
+    font-weight: 600;
+}
+#balance .input,
+#balance p#currency span.button {
+    color: #666666;
+}
+#balance p#currency span.button {
+    padding: 0 0 0 54px;
+}
+#balance p#currency span.button,
+#balance [disabled].input {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+#balance.base p#currency span.button,
+#balance.base input,
+#balance.valueadd p#currency span.button,
+#balance.valueadd .input {
+    height: 1.7em;
+    font-size: 24px;
+}
+
+#balance.total p#currency span.button,
+#balance.total .input {
+    height: 1.2em;
+    font-size: 32px;
+    padding-left: 15px;
+}
+#balance.total p#currency span.button {
+    padding: 0 0 0 38px;
+}
 button#back {
     width: 7.5em;
     height: 2.1em;
     border-radius: 10px;
     position: absolute;
-    bottom: -201.7%;
+    bottom: -56.7%;
     right: -10%;
 }
