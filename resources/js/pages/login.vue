@@ -60,7 +60,9 @@ export default {
                 this.isLoading = false;
                 this.$root.prompt(response.data.text);
                 if (response.data.status == 1)
-                    window.location = response.data.redirect;
+                    setTimeout(() => {
+                        window.location = response.data.redirect;
+                    }, 1000);
             }).catch(error => {
                 this.isLoading = false;
                 this.$root.prompt();
