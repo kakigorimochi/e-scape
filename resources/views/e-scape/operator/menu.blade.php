@@ -9,5 +9,6 @@
 @endsection
 
 @section('content')
-<operator-index :info="{{ json_encode($info) }}"></operator-index>
+<operator-index :info="{{ json_encode($info) }}"
+    :is-unlocked="{{ json_encode($is_unlocked) }}"></operator-index>
 @endsection

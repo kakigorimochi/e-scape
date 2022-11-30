@@ -59,6 +59,10 @@ export default {
     },
     props: {
         info: Object,
+        isUnlocked: Boolean
+    },
+    beforeMount() {
+        if (this.isUnlocked) this.isPassCodeVisible = false;
     },
     methods: {
         changeFocus(ref) {
@@ -66,9 +70,10 @@ export default {
         },
         checkPasscode() {
             let pin = this.pins.join('');
-            if (pin == this.defaultPasscode)
+            if (pin == this.defaultPasscode) {
                 this.isPassCodeVisible = false;
-            else {
+                this.unlock();
+            } else {
                 this.pins = [];
                 this.$refs.pinA.focus();
                 this.$root.prompt('Invalid passcode! Please try again.');
@@ -80,6 +85,11 @@ export default {
         logout() {
             axios.get('/logout').then(() => {
                 window.location = '/';
+            });
+        },
+        unlock() {
+            axios.get('/operator/unlock_index').then((response) => {
+                this.$root.prompt(response.data.text);
             });
         }
     }

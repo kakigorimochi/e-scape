@@ -8,6 +8,7 @@ use App\Model\Location;
 use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class OperatorController extends Controller
 {
@@ -33,9 +34,17 @@ class OperatorController extends Controller
 
     public function home()
     {
-        $data['css']  = ['global', 'operator/home'];
-        $data['info'] = Auth::user();
+        $data['css']         = ['global', 'operator/home'];
+        $data['info']        = Auth::user();
+        $data['is_unlocked'] = Session::get('is_unlocked') ?? false;
         return view('e-scape.operator.menu', $data);
+    }
+
+    public function unlock_index()
+    {
+        $rs = SharedFunctions::success_msg('Unlocked successfully!');
+        Session::put('is_unlocked', true);
+        return response()->json($rs);
     }
 
     public function register(Request $request)

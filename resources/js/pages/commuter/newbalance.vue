@@ -3,9 +3,24 @@
         <span id="subheader" class="is-size-4 text-centered">E-wallet</span>
         <div class="container is-flex is-flex-direction-column mt-6">
             <div class="is-flex is-flex-direction-column">
-                <p>Balance: <b>PHP {{ newBalance - addedValue }}</b></p>
-                <p>Added Value: <b>PHP {{ addedValue }}</b></p>
-                <p>Total: <b>PHP {{ newBalance }}</b></p>
+                <b-field label="Balance">
+                    <p class="control" id="currency">
+                        <span class="button is-static">PHP</span>
+                    </p>
+                    <b-input disabled :value="parseFloat(newBalance - addedValue).toFixed(2)"></b-input>
+                </b-field>
+                <b-field label="Added Value">
+                    <p class="control" id="currency">
+                        <span class="button is-static">PHP</span>
+                    </p>
+                    <b-input disabled :value="addedValue"></b-input>
+                </b-field>
+                <b-field label="Total">
+                    <p class="control" id="currency">
+                        <span class="button is-static">PHP</span>
+                    </p>
+                    <b-input disabled :value="newBalance"></b-input>
+                </b-field>
             </div>
             <div class="mb-5">
                 <b-button id="back" class="is-medium is-fullwidth"
