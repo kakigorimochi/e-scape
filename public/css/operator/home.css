@@ -1,0 +1,73 @@
+.modal #header {
+    position: relative;
+}
+.modal #title {
+    position: absolute;
+    left: 18%;
+    bottom: 18%;
+}
+.modal .field .label {
+    text-align: center;
+    margin-bottom: 1em!important;
+}
+.modal .field .field-body {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.8em;
+}
+.modal .field .field-body div.control {
+    padding: 0 10px;
+}
+.modal .field p.help {
+    text-align: center;
+}
+.modal input.input{
+    border-color: white white #36b3b8;
+    background-color: #fff!important;
+    border-radius: 0;
+    border-bottom-width: 2px;
+    box-shadow: none;
+}
+.modal input.input:focus,
+.modal input.input:active {
+    border-color: white white #36b3b8;
+    background-color: rgb(250, 250, 250)!important;
+    box-shadow: inset 0 0.0625em 0.125em rgb(10 10 10 / 5%);
+}
+.modal .control.has-icons-right .icon.is-right {
+    visibility: hidden;
+}
+.modal .help.is-danger {
+    color: #4a4a4a;
+}
+.modal-background {
+    background-image: linear-gradient(to bottom, #ffffff 90%, #e1e1e1 100%);
+}
+.modal.is-full-screen > .animation-content {
+    background-color: rgba(0, 0, 0, 0.00)!important;
+    background-image: url(../../img/cogs.png), url(../../img/operator.png);
+    background-repeat: no-repeat;
+    background-position: -8.4em 21em, 9em 32em;
+    background-size: 22em, 20em;
+}
+.modal button#continue {
+    width: 7.5em;
+    height: 2.1em;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -30%;
+    left: 30%;
+}
+button#dispatch, button#logout {
+    height: 72px;
+    border-radius: 20px;
+    font-size: 22px;
+}
+button#dispatch {
+    background-image: linear-gradient(to bottom, #4ab484 0%, #48c78e 51%, #4ab484 100%) ;
+}
+button#logout {
+    color: #333;
+    border: 5px solid #48c78e;
+}
+

@@ -28,14 +28,12 @@ html, body {
 #window {
     margin: 1.2em;
     border: 6px solid #36b3b8;
-    position: absolute;
-    top: 20%;
 }
 div .control span.has-text-primary{
     color: #36b3b8!important;
 }
 .input:hover {
-    border-color: #fbfbfb!important;
+    border-color: #fbfbfb #fbfbfb #555!important;
 }
 .modal-card.animation-content {
     padding-left: 0.75rem!important;

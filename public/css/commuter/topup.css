@@ -1,6 +1,6 @@
 #window {
     position: absolute;
-    top: 20%;
+    top: 12.5%;
 }
 #balance .label {
     font-size: 18px;
@@ -16,13 +16,32 @@
     padding: 0 0 0 54px;
 }
 #balance p#currency span.button,
-#balance [disabled].input {
+#balance .input {
     background-color: #ffffff;
-    border-color: #ffffff;
+    border-color: #ffffff!important;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
-button#addvalue {
+#presetvalue label.button {
+    width: 5.75em;
+}
+#presetvalue label.button span {
+    margin-top: -10px;
+}
+#presetvalue label.button span:after {
+    content: 'PHP';
+    font-size: 0.60em;
+    position: absolute;
+    right: 38%;
+    bottom: 5px;
+}
+.b-numberinput #amount.input[type=number] {
+    text-align: left;
+}
+.control.has-icons-right .icon.is-right {
+    top: 8px;
+}
+button#proceed {
     width: 7.5em;
     background-color: #36b3b8;
     border-radius: 25px;
@@ -34,7 +53,6 @@ button#back {
     height: 2.1em;
     border-radius: 10px;
     position: absolute;
-    bottom: -100%;
+    bottom: -34.6%;
     left: -10%;
 }
-

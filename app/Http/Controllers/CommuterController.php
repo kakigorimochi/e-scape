@@ -41,7 +41,7 @@ class CommuterController extends Controller
 
     public function mode_of_payment()
     {
-        $data['css'] = ['global'];
+        $data['css'] = ['global', 'commuter/mop'];
         return view('e-scape.commuter.e-modeofpayment', $data);
     }
 
@@ -53,7 +53,7 @@ class CommuterController extends Controller
             ->where('status', Transaction::STATUS_INACTIVE)
             ->orderBy('updated_at', 'DESC')
             ->first();
-        $data['css']         = ['global'];
+        $data['css']         = ['global', 'commuter/topup-fin'];
         $data['added_value'] = $query->amount;
         $data['new_balance'] = $wallet->balance;
         return view('e-scape.commuter.e-newbalance', $data);
@@ -80,7 +80,7 @@ class CommuterController extends Controller
 
     public function topup()
     {
-        $data['css'] = ['global'];
+        $data['css'] = ['global', 'commuter/topup'];
         return view('e-scape.commuter.e-topup', $data);
     }
 

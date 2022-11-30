@@ -1,0 +1,65 @@
+#subheader {
+    padding: 0.2em;
+    margin: 0.5em 2.1em -1em;
+}
+#subheader p {
+    font-size: 12px;
+    color: #6a6a6a;
+    letter-spacing: 0.05em;
+    margin-top: -2px;
+    text-transform: lowercase;
+}
+#dispatchtable .table-wrapper {
+    overflow-x: hidden;
+}
+#dispatchtable table span {
+    font-size: 14px;
+}
+#dispatchtable .table td,
+#dispatchtable .table th {
+    border: none;
+    font-size: 13px;
+}
+#dispatchtable .table td:nth-child(2),
+#dispatchtable .table th:nth-child(2) {
+    float: right;
+}
+#dispatchtable .table.is-narrow td {
+    padding: 0.2em 0.5em;
+}
+#dispatchtable table tr:first-child td,
+#dispatchtable table tr:last-child td {
+    font-weight: 600;
+}
+#dispatchtable table tr td:before {
+    margin-bottom: -1px;
+    margin-right: 5px;
+}
+#dispatchtable table tr td:nth-child(1):before,
+#dispatchtable table tr:first-child td:nth-child(1):before,
+#dispatchtable table tr:last-child td:nth-child(1):before {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 7.5px;
+}
+#dispatchtable table tr td:nth-child(1):before {
+    box-shadow: 0 0 0 1px #36b3b8;
+    border: 2.5px solid #ffffff;
+    background: #ffffff!important;
+}
+#dispatchtable table tr:first-child td:nth-child(1):before,
+#dispatchtable table tr:last-child td:nth-child(1):before {
+    box-shadow: 0 0 0 1px #36b3b8;
+    border: 2.5px solid #ffffff;
+    background: #36b3b8!important;
+}
+button#back {
+    width: 7.5em;
+    height: 2.1em;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -13.4%;
+    right: 5%;
+}
