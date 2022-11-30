@@ -22,10 +22,7 @@ export default {
             isLoading: false,
         };
     },
-    props: {
-        addedValue: Number,
-        newBalance: Number
-    },
+    props: ['addedValue', 'newBalance'],
     methods: {
         index() {
             this.isLoading = true;
