@@ -55,7 +55,7 @@
                     </div>
                     <div class="column has-text-right">
                         <span><strong>PHP {{ journey.amount }}</strong><br></span>
-                        <span><strong>PHP {{ wallet.balance - journey.amount }}</strong><br></span>
+                        <span><strong>PHP {{ parseFloat(wallet.balance - journey.amount).toFixed(2) }}</strong><br></span>
                         <span id="date">{{ dateNow }}</span>
                     </div>
                 </div>
