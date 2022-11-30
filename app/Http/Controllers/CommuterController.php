@@ -64,7 +64,7 @@ class CommuterController extends Controller
         $journey              = Journey::where('user_id', Auth::user()->id)->where('status', 2)->first();
         $journey->origin      = Location::where('id', $journey->origin_id)->pluck('name')->first();
         $journey->destination = Location::where('id', $journey->destination_id)->pluck('name')->first();
-        $data['css']          = ['global'];
+        $data['css']          = ['global', 'commuter/pay-journey'];
         $data['journey']      = $journey;
         $data['uuid']         = Auth::user()->uuid;
         $data['wallet']       = Wallet::where('user_id', Auth::user()->id)->first();
@@ -73,7 +73,7 @@ class CommuterController extends Controller
 
     public function single_journey_ticket()
     {
-        $data['css']       = ['global'];
+        $data['css']       = ['global', 'commuter/ticket'];
         $data['locations'] = Location::all();
         return view('e-scape.commuter.e-ticket', $data);
     }
@@ -95,7 +95,7 @@ class CommuterController extends Controller
             'type'      => Transaction::TYPE_ADD_BALANCE,
             'status'    => Transaction::STATUS_PENDING
         ]);
-        if ($query && $transact) $rs = SharedFunctions::success_msg('Pending transaction created successfully!');
+        if ($query && $transact) $rs = SharedFunctions::success_msg('Transaction pending');
         return response()->json($rs);
     }
 
@@ -108,7 +108,7 @@ class CommuterController extends Controller
             ->where('status', Transaction::STATUS_PENDING)
             ->first();
         $wallet->decrement('balance', $query->amount);
-        if ($query->delete()) $rs = SharedFunctions::success_msg('Cancelled transaction successfully!');
+        if ($query->delete()) $rs = SharedFunctions::success_msg('Transaction cancelled');
         return response()->json($rs);
     }
 
@@ -116,7 +116,7 @@ class CommuterController extends Controller
     {
         $rs = SharedFunctions::default_msg();
         $query = Journey::where('id', $request->id)->delete();
-        if ($query) $rs = SharedFunctions::success_msg('Cancelled journey successfully!');
+        if ($query) $rs = SharedFunctions::success_msg('Journey cancelled');
         return response()->json($rs);
     }
 
@@ -142,7 +142,7 @@ class CommuterController extends Controller
                 $dispatch->tickets = 1;
             }
             if ($query->save() && $dispatch->save() && $transaction && $wallet->save())
-                $rs = SharedFunctions::success_msg('Journey paid successfully!');
+                $rs = SharedFunctions::success_msg('Journey paid');
         }
         return response()->json($rs);
     }
@@ -155,7 +155,7 @@ class CommuterController extends Controller
             ->where('type', Transaction::TYPE_ADD_BALANCE)
             ->where('status', Transaction::STATUS_PENDING)
             ->update(['status' => Transaction::STATUS_INACTIVE]);
-        if ($query) $rs = SharedFunctions::success_msg('Journey paid successfully!');
+        if ($query) $rs = SharedFunctions::success_msg('Journey paid');
         return response()->json($rs);
     }
 
@@ -172,7 +172,7 @@ class CommuterController extends Controller
             'password'  => bcrypt($request->password)
         ]);
         $wallet = Wallet::create(['user_id' => $query->id]);
-        if ($query && $wallet) $rs = SharedFunctions::success_msg('Registered successfully!');
+        if ($query && $wallet) $rs = SharedFunctions::success_msg('Register success');
         return response()->json($rs);
     }
 
@@ -188,7 +188,7 @@ class CommuterController extends Controller
             'origin_type'    => $request->origin_type,
             'status'         => Journey::STATUS_PENDING
         ]);
-        if ($query) $rs = SharedFunctions::success_msg('Journey created successfully!');
+        if ($query) $rs = SharedFunctions::success_msg('Journey created');
         return response()->json($rs);
     }
 }
