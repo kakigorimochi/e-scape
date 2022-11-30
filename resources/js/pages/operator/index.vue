@@ -1,18 +1,34 @@
 <template>
     <div class="container pt-6 px-6">
-        <span class="is-size-1">Welcome operator!</span>
-        <div class="container is-flex is-flex-direction-column mt-6 pb-6">
-            <div class="mb-3">
-                <b-button @click="dispatches" type="is-success is-light">Dispatches</b-button>
+        <div class="is-flex is-justify-content-center">
+            <div class="is-flex is-flex-direction-column">
+                <figure class="image mt-3 mx-auto is-64x64">
+                    <img src="/img/e-logo.png">
+                </figure>
+                <span id="title" class="is-size-3">E-scape</span>
+                <span class="has-text-centered is-size-6">Good day, {{ info.fname + ' ' + info.lname }}</span>
             </div>
-            <div>
-                <b-button @click="logout" type="is-info is-light">Logout</b-button>
+        </div>
+        <div class="container is-flex is-flex-direction-column mt-3 pb-3">
+            <div class="mt-5">
+                <b-button id="dispatch" class="is-medium is-fullwidth"
+                @click="dispatches" type="is-success">Dispatch</b-button>
+            </div>
+            <div class="mt-5">
+                <b-button id="logout" class="is-medium is-fullwidth"
+                @click="logout" type="is-success is-light">Logout</b-button>
             </div>
         </div>
         <b-modal v-model="isPassCodeVisible" :can-cancel="false" full-screen :width="480">
-            <div class="container p-6">
-                <div class="container">
-                    <b-field label="Passcode">
+            <div id="pincode" class="container pt-6 px-6">
+                <div id="header" class="is-flex is-justify-content-left">
+                    <figure class="image mt-3 mb-4 is-48x48">
+                        <img src="/img/e-logo.png">
+                    </figure>
+                    <span id="title" class="is-size-4">E-scape</span>
+                </div>
+                <div class="container is-flex is-flex-direction-column mt-6 pb-3">
+                    <b-field label="Operator Code" :message="'Never share your PIN or OTP with anyone.'">
                         <b-input v-model="pins[0]" @keyup.native="changeFocus('pinB')"
                             :min="0" :max="9" ref="pinA" type="number"></b-input>
                         <b-input v-model="pins[1]" @keyup.native="changeFocus('pinC')"
@@ -23,9 +39,9 @@
                             :min="0" :max="9" ref="pinD" type="number"></b-input>
                     </b-field>
                 </div>
-                <div class="container is-flex is-justify-content-end p-3">
-                    <b-button class="mr-3" @click="logout" type="is-light">Cancel</b-button>
-                    <b-button @click="checkPasscode" type="is-success">Enter</b-button>
+                <div class="mb-5">
+                    <b-button id="continue" class="is-medium is-fullwidth"
+                    @click="checkPasscode" type="is-success">Continue</b-button>
                 </div>
             </div>
         </b-modal>
