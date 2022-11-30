@@ -94,15 +94,12 @@ export default {
                 data: this.user
             }).then(response => {
                 this.isSubmitLoading = false;
-                this.$buefy.dialog.alert({
-                    message: response.data.text,
-                    type: 'is-success'
-                });
+                this.$root.prompt(response.data.text);
                 if (response.data.status ==1)
                     window.location = '/' + this.userType;
             }).catch(error => {
                 this.isSubmitLoading = false;
-                this.$root.defaultError();
+                this.$root.prompt();
             });
         }
     }

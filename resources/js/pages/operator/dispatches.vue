@@ -8,7 +8,7 @@
                         {{ props.row.name }}
                     </b-table-column>
                     <b-table-column label="No. of tickets bought" v-slot="props" :style="'text-align: right'">
-                        {{ props.row.tickets }} &nbsp;tickets
+                        {{ props.row.tickets ? props.row.tickets : 0 }} &nbsp;ticket/s
                     </b-table-column>
                 </b-table>
             </div>
@@ -30,11 +30,11 @@ export default {
     props: {
         dispatches: Array,
     },
-    mounted: function () {
+    mounted() {
         this.time = this.printtime();
     },
     methods: {
-        printtime: function () {
+        printtime() {
             return new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         },
         index() {

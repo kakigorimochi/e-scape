@@ -71,7 +71,7 @@ export default {
             else {
                 this.pins = [];
                 this.$refs.pinA.focus();
-                this.$root.defaultError('Invalid passcode! Please try again.');
+                this.$root.prompt('Invalid passcode! Please try again.');
             }
         },
         dispatches() {

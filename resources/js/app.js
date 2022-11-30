@@ -56,7 +56,7 @@ const app = new Vue({
             const item = array.find(condition);
             return array.indexOf(item);
         },
-        defaultError(msg = 'Oops! Something went wrong.') {
+        prompt(msg = 'Oops! Something went wrong.') {
             this.$buefy.toast.open({
                 duration: 5000,
                 message: msg,
