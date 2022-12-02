@@ -40,6 +40,23 @@ class OperatorController extends Controller
         return view('e-scape.operator.menu', $data);
     }
 
+    public function dispatch_tickets(Request $request)
+    {
+        $rs = SharedFunctions::default_msg();
+        $query = Dispatch::whereIn('location_id', $request->locations)
+            ->update(['tickets' => 0]);
+        if ($query) {
+            $rs = SharedFunctions::success_msg('Dispatch success');
+            $rs['dispatches'] = Location::all()->map(function($q) {
+                $q->tickets = Dispatch::where('location_id', $q->id)
+                    ->pluck('tickets')
+                    ->first();
+                return $q;
+            });
+        }
+        return response()->json($rs);
+    }
+
     public function unlock_index()
     {
         $rs = SharedFunctions::success_msg('Please wait');
