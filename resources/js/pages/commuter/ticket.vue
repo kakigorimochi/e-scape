@@ -15,7 +15,8 @@
         <span id="subheader" class="is-size-4 text-centered">Single Journey Ticket <br><p>(Point of Origin)</p></span>
         <div class="container is-flex is-flex-direction-column mt-4 pb-5">
             <div class="mt-5">
-                <b-select v-model="originID" expanded placeholder="Select point of origin...">
+                <b-select v-model="originID" expanded
+                    :disabled="originType == null" placeholder="Select point of origin...">
                     <option v-for="(item, index) in locations" :key="index"
                     :label="item.name" :value="item.id"></option>
                 </b-select>
@@ -24,18 +25,19 @@
         <span id="subheader" class="is-size-4 text-centered">Single Journey Ticket <br><p>(Destination)</p></span>
         <div class="container is-flex is-flex-direction-column mt-4">
             <div class="mt-5">
-                <b-select v-model="destinationID" expanded placeholder="Select destination...">
+                <b-select v-model="destinationID" expanded
+                     :disabled="originType == null" placeholder="Select destination...">
                     <option v-for="(item, index) in destinations" :key="index"
-                    :label="item.name" :value="item.id"></option>
+                        :label="item.name" :value="item.id"></option>
                 </b-select>
             </div>
             <div class="mb-4">
-                <b-button id="proceed" class="is-medium is-fullwidth"
-                @click="submitJourney" type="is-success">Proceed</b-button>
+                <b-button id="proceed" class="is-medium is-fullwidth" :disabled="!originID || !destinationID"
+                    @click="submitJourney" type="is-success">Proceed</b-button>
             </div>
             <div class="mb-5">
                 <b-button id="back" class="is-medium is-fullwidth"
-                @click="index" type="is-success">Back</b-button>
+                    @click="index" type="is-success">Back</b-button>
             </div>
         </div>
     </div>
