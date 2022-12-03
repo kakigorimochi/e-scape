@@ -25,14 +25,15 @@ class OperatorController extends Controller
         $locations = Location::all();
         $last = 0;
         foreach($locations as $i => $location) {
-            $locations[$i]->tickets = rand(0, 255);
+            $locations[$i]->tickets = rand(0, 4096);
             $last++;
         }
         $last--;
-        $random_one = rand(0, $last);
-        $random_two = rand(0, $last);
-        $locations[$random_one]->tickets = 0;
-        $locations[$random_two]->tickets = 0;
+        for ($i = 0; $i < $last/8; $i += 1)
+            $locations[rand(0, $last)]->tickets = 0;
+        foreach($locations as $location)
+            Dispatch::where('location_id', $location->id)
+                ->update(['tickets' => $location->tickets]);
         $data['dispatches'] = $locations;
         return view('e-scape.operator.e-dispatch', $data);
     }
