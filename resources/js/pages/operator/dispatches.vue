@@ -20,12 +20,12 @@
                 </b-table>
             </div>
             <div class="mb-5">
-                <b-button id="dispatch" class="is-medium is-fullwidth"
-                @click="dispatch" :loading="isDispatchLoading" type="is-success">Dispatch</b-button>
+                <b-button id="dispatch" class="is-medium is-fullwidth" @click="dispatch"
+                    :disabled="selectedLocations.length == 0" :loading="isDispatchLoading" type="is-success">Dispatch</b-button>
             </div>
             <div class="mb-5">
                 <b-button id="back" class="is-medium is-fullwidth"
-                @click="index" type="is-success">Back</b-button>
+                    @click="index" type="is-success">Back</b-button>
             </div>
         </div>
     </div>

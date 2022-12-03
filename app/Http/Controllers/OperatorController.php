@@ -22,13 +22,18 @@ class OperatorController extends Controller
     public function dispatches()
     {
         $data['css']        = ['global', 'operator/dispatch'];
-        $data['dispatches'] = Location::all()
-            ->map(function($q) {
-                $q->tickets = Dispatch::where('location_id', $q->id)
-                    ->pluck('tickets')
-                    ->first();
-                return $q;
-            });
+        $locations = Location::all();
+        $last = 0;
+        foreach($locations as $i => $location) {
+            $locations[$i]->tickets = rand(0, 255);
+            $last++;
+        }
+        $last--;
+        $random_one = rand(0, $last);
+        $random_two = rand(0, $last);
+        $locations[$random_one]->tickets = 0;
+        $locations[$random_two]->tickets = 0;
+        $data['dispatches'] = $locations;
         return view('e-scape.operator.e-dispatch', $data);
     }
 

@@ -18,7 +18,7 @@ class DispatchesSeeder extends Seeder
         foreach($locations as $location) {
             Dispatch::create([
                 'location_id' => $location->id,
-                'tickets' => rand(5, 70)
+                'tickets' => rand(0, 255)
             ]);
         }
     }
