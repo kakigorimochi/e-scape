@@ -4,22 +4,28 @@
         <div class="is-flex is-flex-direction-column mt-5">
             <div id="dispatchtable" class="mt-3 mb-3">
                 <b-table :data="dispatches" narrowed :mobile-cards="false">
-                    <b-table-column id="stations" label="EDSA Carousel Stations" v-slot="props">
-                        <b-checkbox v-model="selectedLocations"
-                            :native-value="props.row.id" type="is-success">
+                    <b-table-column label="EDSA Carousel Stations" v-slot="props">
+                        <b-checkbox v-model="selectedLocations" type="is-success"
+                        :class="{'has-text-weight-bold': locationSelected(props.row.id)}"
+                        :native-value="props.row.id" :disabled="!props.row.tickets">
                             {{ props.row.name }}
                         </b-checkbox>
                     </b-table-column>
                     <b-table-column label="No. of tickets bought" v-slot="props" :style="'text-align: right'">
-                        {{ props.row.tickets ? props.row.tickets : 0 }} &nbsp;ticket/s
+                        <p :class="{'has-text-weight-bold': locationSelected(props.row.id)}"
+                        :style="[!props.row.tickets ? {'opacity': 0.5} : {}]">
+                            {{ props.row.tickets ? props.row.tickets : '0' }} &nbsp;ticket/s
+                        </p>
                     </b-table-column>
                 </b-table>
             </div>
             <div class="mb-5">
+                <b-button id="dispatch" class="is-medium is-fullwidth"
+                @click="dispatch" :loading="isDispatchLoading" type="is-success">Dispatch</b-button>
+            </div>
+            <div class="mb-5">
                 <b-button id="back" class="is-medium is-fullwidth"
-                    @click="index" :loading="isDispatchLoading" type="is-success">Back</b-button>
-                <b-button class="is-medium is-fullwidth"
-                    @click="dispatch" type="is-success">Dispatch</b-button>
+                @click="index" type="is-success">Back</b-button>
             </div>
         </div>
     </div>
@@ -41,6 +47,9 @@ export default {
         this.time = this.printtime();
     },
     methods: {
+        locationSelected(id) {
+            return this.selectedLocations.includes(id);
+        },
         dispatch() {
             this.isDispatchLoading = true;
             axios({
