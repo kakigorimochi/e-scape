@@ -1,7 +1,7 @@
 #window {
     width: 90.7%;
     position: absolute;
-    top: 20%;
+    top: 27.5%;
 }
 .control-label {
     font-size: 18px;
@@ -24,7 +24,7 @@ button#back {
     height: 2.1em;
     border-radius: 10px;
     position: absolute;
-    bottom: -201.7%;
+    bottom: -247.7%;
 }
 button#proceed {
     right: -10%;

@@ -15,17 +15,24 @@
 #dispatchtable table span {
     font-size: 14px;
 }
+#dispatchtable table tr:first-child td {
+    margin-top: 4.3px;
+}
 #dispatchtable .table td,
 #dispatchtable .table th {
     border: none;
     font-size: 13px;
+}
+#dispatchtable .table td:nth-child(1),
+#dispatchtable .table th:nth-child(1) {
+    float: left;
 }
 #dispatchtable .table td:nth-child(2),
 #dispatchtable .table th:nth-child(2) {
     float: right;
 }
 #dispatchtable .table.is-narrow td {
-    padding: 0.2em 0.5em;
+    padding: 0.15em 0.20em;
 }
 /* #dispatchtable table tr:first-child td,
 #dispatchtable table tr:last-child td {
@@ -44,22 +51,57 @@
     height: 12px;
     border-radius: 7.5px;
 } */
-#dispatchtable table tr td:nth-child(1):before {
+/* #dispatchtable table tr td:nth-child(1):before {
     box-shadow: 0 0 0 1px #36b3b8;
     border: 2.5px solid #ffffff;
     background: #ffffff!important;
-}
+} */
 /* #dispatchtable table tr:first-child td:nth-child(1):before,
 #dispatchtable table tr:last-child td:nth-child(1):before {
     box-shadow: 0 0 0 1px #36b3b8;
     border: 2.5px solid #ffffff;
     background: #36b3b8!important;
 } */
+/* #dispatchtable .b-checkbox.checkbox[disabled] {
+    opacity: 1.0!important;
+} */
+#dispatchtable .b-checkbox.checkbox[disabled] input[type=checkbox] + .check {
+    border-radius: 25px;
+}
+#dispatchtable .b-checkbox.checkbox input[type=checkbox] + .check {
+    width: 1.10em;
+    height: 1.10em;
+    border-radius: 25px;
+    box-shadow: 0 0 0 1.5px #36b3b8;
+    border: 2.5px solid #ffffff;
+}
+#dispatchtable .b-checkbox.checkbox[disabled] input[type=checkbox] + .check {
+    /* opacity: 0.5!important; */
+    box-shadow: 0 0 0 1.5px #7a7a7a;
+    border: 2.5px solid #ffffff;
+    /* background: #7a7a7a; */
+}
+#dispatchtable .b-checkbox.checkbox input[type=checkbox]:checked + .check.is-success {
+    background: #36b3b8;
+}
+#dispatchtable .b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-success {
+    box-shadow: 0 0 0 1.5px #36b3b8!important;
+    border-color: none;
+}
+#dispatchtable .b-checkbox.checkbox input[type=checkbox]:focus + .check {
+    box-shadow: none!important;
+}
+button#dispatch,
 button#back {
     width: 7.5em;
     height: 2.1em;
     border-radius: 10px;
     position: absolute;
-    bottom: -13.4%;
+    bottom: -5%;
+}
+button#dispatch {
     right: 5%;
+}
+button#back {
+    left: 5%;
 }

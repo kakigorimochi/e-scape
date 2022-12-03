@@ -46,7 +46,7 @@ class OperatorController extends Controller
         $query = Dispatch::whereIn('location_id', $request->locations)
             ->update(['tickets' => 0]);
         if ($query) {
-            $rs = SharedFunctions::success_msg('Dispatch success');
+            $rs = SharedFunctions::success_msg('Dispatch requested');
             $rs['dispatches'] = Location::all()->map(function($q) {
                 $q->tickets = Dispatch::where('location_id', $q->id)
                     ->pluck('tickets')
@@ -59,7 +59,7 @@ class OperatorController extends Controller
 
     public function unlock_index()
     {
-        $rs = SharedFunctions::success_msg('Please wait');
+        $rs = SharedFunctions::success_msg('OTP authenticated');
         Session::put('is_unlocked', true);
         return response()->json($rs);
     }
