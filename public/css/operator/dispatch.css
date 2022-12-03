@@ -82,14 +82,15 @@
     /* background: #7a7a7a; */
 }
 #dispatchtable .b-checkbox.checkbox input[type=checkbox]:checked + .check.is-success {
+    box-shadow: 0 0 0 1.5px #36b3b8;
     background: #36b3b8;
 }
 #dispatchtable .b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-success {
-    box-shadow: 0 0 0 1.5px #36b3b8!important;
-    border-color: none;
+    box-shadow: 0 0 0 1.5px #36b3b8;
+    /* border-color: none; */
 }
 #dispatchtable .b-checkbox.checkbox input[type=checkbox]:focus + .check {
-    box-shadow: none!important;
+    box-shadow: 0 0 0 1.5px #36b3b8;
 }
 button#dispatch,
 button#back {

@@ -14,7 +14,7 @@
                     <b-table-column label="No. of tickets bought" v-slot="props" :style="'text-align: right'">
                         <p :class="{'has-text-weight-bold': locationSelected(props.row.id)}"
                         :style="[!props.row.tickets ? {'opacity': 0.5} : {}]">
-                            {{ props.row.tickets ? props.row.tickets : '0' }} &nbsp;ticket/s
+                        {{ Number(props.row.tickets ? props.row.tickets : 0).toLocaleString() }} &nbsp;ticket/s
                         </p>
                     </b-table-column>
                 </b-table>
