@@ -38,7 +38,8 @@ export default {
         return {
             isLoading: false,
             email: null,
-            password: null
+            password: null,
+            delay: 750
         };
     },
     props: {
@@ -62,7 +63,7 @@ export default {
                 if (response.data.status == 1)
                     setTimeout(() => {
                         window.location = response.data.redirect;
-                    }, 1000);
+                    }, this.delay);
             }).catch(error => {
                 this.isLoading = false;
                 this.$root.prompt();
