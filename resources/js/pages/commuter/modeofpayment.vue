@@ -4,11 +4,6 @@
         <div class="container is-flex is-flex-direction-column mt-6 mb-3">
             <div id="mopgroup">
                 <b-field>
-                    <b-radio v-model="modeOfPayment" native-value="pay_cash"
-                    :style="[modeOfPayment === 'pay_cash' ? {'font-weight': 600} : {}]"
-                    type="is-success">Pay with Cash</b-radio>
-                </b-field>
-                <b-field>
                     <b-radio v-model="modeOfPayment" native-value="gcash"
                     :style="[modeOfPayment === 'gcash' ? {'font-weight': 600} : {}]"
                     type="is-success">GCash E-wallet</b-radio>
@@ -37,7 +32,7 @@ export default {
         return {
             isAddValueLoading: false,
             isCancelTransactionLoading: false,
-            modeOfPayment: 'pay_cash'
+            modeOfPayment: 'gcash'
         };
     },
     methods: {

@@ -46,5 +46,6 @@ Route::prefix('operator')->middleware(['check_auth'])->group(function () {
     Route::get('index', 'OperatorController@home');
     Route::get('dispatches', 'OperatorController@dispatches');
     Route::get('unlock_index', 'OperatorController@unlock_index');
+    Route::post('dispatch_tickets', 'OperatorController@dispatch_tickets');
     Route::post('register_user', 'OperatorController@register');
 });
