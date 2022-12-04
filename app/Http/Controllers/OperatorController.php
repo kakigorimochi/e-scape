@@ -72,8 +72,13 @@ class OperatorController extends Controller
     public function register(Request $request)
     {
         $rs = SharedFunctions::default_msg();
+        $check = User::where('email', $request->email)->first();
+        if ($check) {
+            $rs = SharedFunctions::prompt_msg("User already exists");
+            goto end;
+        }
         $query = User::create([
-            'user_type' => 1,
+            'user_type' => User::TYPE_OPERATOR,
             'fname'     => $request->firstname,
             'lname'     => $request->lastname,
             'birthdate' => $request->birthdate,
@@ -82,6 +87,7 @@ class OperatorController extends Controller
             'password'  => bcrypt($request->password)
         ]);
         if ($query) $rs = SharedFunctions::success_msg('Register success');
+        end:
         return response()->json($rs);
     }
 }

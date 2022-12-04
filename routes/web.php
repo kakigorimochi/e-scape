@@ -39,13 +39,13 @@ Route::prefix('commuter')->middleware(['check_auth'])->group(function () {
     Route::post('cancel_journey', 'CommuterController@cancel_journey');
     Route::post('journey_paid', 'CommuterController@journey_paid');
     Route::post('journey_payment', 'CommuterController@journey_payment');
-    Route::post('register_user', 'CommuterController@register');
     Route::post('submit_journey', 'CommuterController@submit_journey');
 });
+Route::post('/commuter/register_user', 'CommuterController@register');
 Route::prefix('operator')->middleware(['check_auth'])->group(function () {
     Route::get('index', 'OperatorController@home');
     Route::get('dispatches', 'OperatorController@dispatches');
     Route::get('unlock_index', 'OperatorController@unlock_index');
     Route::post('dispatch_tickets', 'OperatorController@dispatch_tickets');
-    Route::post('register_user', 'OperatorController@register');
 });
+Route::post('/operator/register_user', 'OperatorController@register');
