@@ -41,7 +41,7 @@
             </div>
             <div class="mb-3">
                 <b-field label="Mobile">
-                    <b-input v-model="user.phone"
+                    <b-input v-model="user.phone" :maxlength="11"
                     placeholder="e.g. 09112345678"></b-input>
                 </b-field>
             </div>
@@ -95,7 +95,7 @@ export default {
             }).then(response => {
                 this.isSubmitLoading = false;
                 this.$root.prompt(response.data.text);
-                if (response.data.status ==1)
+                if (response.data.status == 1)
                     window.location = '/' + this.userType;
             }).catch(error => {
                 this.isSubmitLoading = false;

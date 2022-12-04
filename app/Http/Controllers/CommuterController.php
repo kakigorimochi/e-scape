@@ -162,8 +162,13 @@ class CommuterController extends Controller
     public function register(Request $request)
     {
         $rs = SharedFunctions::default_msg();
+        $check = User::where('email', $request->email)->first();
+        if ($check) {
+            $rs = SharedFunctions::prompt_msg("User already exists");
+            goto end;
+        }
         $query = User::create([
-            'user_type' => 0,
+            'user_type' => User::TYPE_COMMUTER,
             'fname'     => $request->firstname,
             'lname'     => $request->lastname,
             'birthdate' => $request->birthdate,
@@ -173,6 +178,7 @@ class CommuterController extends Controller
         ]);
         $wallet = Wallet::create(['user_id' => $query->id]);
         if ($query && $wallet) $rs = SharedFunctions::success_msg('Register success');
+        end:
         return response()->json($rs);
     }
 
